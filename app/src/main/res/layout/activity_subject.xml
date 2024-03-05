@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SemesterActivity">
+    tools:context=".activities.SubjectActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/semesterToolbar"
+        android:id="@+id/subjectToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/secondary"
@@ -20,13 +20,13 @@
         app:titleTextColor="@color/white"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/semesterRecyclerView"
+        android:id="@+id/subjectRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/semesterToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/subjectToolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

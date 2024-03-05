@@ -40,8 +40,6 @@ class SemesterActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         toolbar?.setNavigationOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
             finish()
         }
 

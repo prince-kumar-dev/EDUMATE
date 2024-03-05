@@ -2,11 +2,13 @@ package com.example.edumate.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.edumate.R
@@ -23,6 +25,7 @@ class SubjectActivity : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
     private var semester: String? = null
     private var department: String? = null
+    // private lateinit var navigationArrow: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subject)
@@ -41,12 +44,12 @@ class SubjectActivity : AppCompatActivity() {
 
     private fun setUpToolbar() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.subjectToolbar)
+//        navigationArrow = findViewById(R.id.navigationArrow)
+
         toolbar?.title = semester
         setSupportActionBar(toolbar)
 
         toolbar?.setNavigationOnClickListener {
-            val intent = Intent(this, Semester::class.java)
-            startActivity(intent)
             finish()
         }
     }
@@ -71,7 +74,7 @@ class SubjectActivity : AppCompatActivity() {
     private fun setUpRecyclerView() {
         val semesterRecyclerView = findViewById<RecyclerView>(R.id.subjectRecyclerView)
         adapter = SubjectAdapter(this, subjectList)
-        semesterRecyclerView.layoutManager = LinearLayoutManager(this)
+        semesterRecyclerView.layoutManager = GridLayoutManager(this, 2)
         semesterRecyclerView.adapter = adapter
     }
 }
