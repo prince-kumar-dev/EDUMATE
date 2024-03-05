@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/semesterCardContainer"
+        android:id="@+id/subjectCardContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/white"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:cardCornerRadius="4dp"
-        app:cardUseCompatPadding="true"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/white"
         android:elevation="16dp"
+        app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,29 +22,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="8dp"
             android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_margin="10dp">
+            android:orientation="vertical">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                app:srcCompat="@drawable/book" />
+                android:id="@+id/subjectIcon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/svg_loving" />
 
             <TextView
-                android:id="@+id/semesterName"
+                android:id="@+id/subjectTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="5dp"
                 android:fontFamily="@font/inter_semibold"
-                android:text=""
                 android:gravity="center"
+                android:padding="5dp"
                 android:textColor="@color/black1"
-                android:textSize="18sp"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+                android:textSize="16sp"
+                tools:text="10/01/2024" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

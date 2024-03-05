@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.edumate.R
@@ -18,9 +17,9 @@ class DepartmentAdapter(private var context: Context, private val departments: L
     RecyclerView.Adapter<DepartmentAdapter.DepartmentViewHolder>() {
 
     inner class DepartmentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var subjectViewTitle: TextView = itemView.findViewById(R.id.departmentTitle)
+        var departmentViewTitle: TextView = itemView.findViewById(R.id.departmentTitle)
         var iconView: ImageView = itemView.findViewById(R.id.departmentIcon)
-        var cardContainer: CardView = itemView.findViewById(R.id.departmentCardContainer)
+        // var cardContainer: CardView = itemView.findViewById(R.id.departmentCardContainer)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DepartmentViewHolder {
@@ -34,7 +33,7 @@ class DepartmentAdapter(private var context: Context, private val departments: L
 
     override fun onBindViewHolder(holder: DepartmentViewHolder, position: Int) {
 
-        holder.subjectViewTitle.text = departments[position].title
+        holder.departmentViewTitle.text = departments[position].title
 
         // holder.iconView.setImageResource(departments[position].iconUrl)
         Glide.with(context)
