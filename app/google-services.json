@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "238082743291",
+    "project_id": "edumate-422fd",
+    "storage_bucket": "edumate-422fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238082743291:android:67126a723e8a5c01f3c95e",
+        "android_client_info": {
+          "package_name": "com.example.edumate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-Y6ObN1YfIjcKnkxpAjzJc7r8sIzysQI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

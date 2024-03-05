@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">EduMate</string>
+    <string name="loginPageHeading">Hello,\nLogin Now</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forget_npassword">Forget password?</string>
+    <string name="login">Login</string>
+    <string name="messageForSignUp">You don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="college_name">College Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="signUpPageHeading">Hello,\nSign Up Now</string>
+    <string name="full_name">Full Name</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="forget_password">Forget\nPassword</string>
+    <string name="reset">Reset</string>
+    <string name="tag_line">Your Learning Partner</string>
+    <string name="r_amp_d"><![CDATA[R & D]]></string>
+    <string name="article">Article</string>
+    <string name="placement">Placement</string>
+    <string name="home">Home</string>
+    <string name="playlist">Playlist</string>
+    <string name="department">Department</string>
+    <string name="cse">CSE</string>
+    <string name="it">IT</string>
+    <string name="ece">ECE</string>
+    <string name="me">ME</string>
+    <string name="bca">BCA</string>
+    <string name="profile">Profile</string>
+    <string name="log_out">Log Out</string>
+    <string name="about_us">About Us</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="share">Share</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="branch">Branch</string>
+</resources>

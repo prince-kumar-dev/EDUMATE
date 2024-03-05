@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/home"
+        android:title="@string/home"/>
+
+    <item
+        android:id="@+id/placement"
+        android:icon="@drawable/placement"
+        android:title="@string/placement"/>
+
+    <item
+        android:id="@+id/articles"
+        android:icon="@drawable/article"
+        android:title="@string/article"/>
+
+    <item
+        android:id="@+id/r_and_d"
+        android:icon="@drawable/r_and_d"
+        android:title="@string/r_amp_d"/>
+
+    <item
+        android:id="@+id/playlist"
+        android:icon="@drawable/playlist"
+        android:title="@string/playlist"/>
+
+    <item android:title="@string/department">
+
+        <menu>
+            <item
+                android:id="@+id/cse"
+                android:icon="@drawable/cse"
+                android:title="@string/cse"/>
+            <item
+                android:id="@+id/it"
+                android:icon="@drawable/it"
+                android:title="@string/it"/>
+            <item
+                android:id="@+id/ece"
+                android:icon="@drawable/ece"
+                android:title="@string/ece"/>
+            <item
+                android:id="@+id/me"
+                android:icon="@drawable/me"
+                android:title="@string/me"/>
+            <item
+                android:id="@+id/bca"
+                android:icon="@drawable/bca"
+                android:title="@string/bca"/>
+        </menu>
+    </item>
+
+    <item android:title="@string/profile">
+
+        <menu>
+            <item
+                android:id="@+id/profile"
+                android:icon="@drawable/profile"
+                android:title="@string/profile"/>
+            <item
+                android:id="@+id/forgetPassword"
+                android:icon="@drawable/forget_password"
+                android:title="@string/forget_npassword"/>
+            <item
+                android:id="@+id/lotOut"
+                android:icon="@drawable/log_out"
+                android:title="@string/log_out"/>
+        </menu>
+    </item>
+
+    <item android:title="@string/about_us">
+
+        <menu>
+            <item
+                android:id="@+id/share"
+                android:icon="@drawable/share"
+                android:title="@string/share"/>
+            <item
+                android:id="@+id/rateUs"
+                android:icon="@drawable/rate_us"
+                android:title="@string/rate_us"/>
+            <item
+                android:id="@+id/contactUs"
+                android:icon="@drawable/contact_us"
+                android:title="@string/contact_us"/>
+        </menu>
+    </item>
+</menu>
