@@ -25,7 +25,6 @@ class SubjectActivity : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
     private var semester: String? = null
     private var department: String? = null
-    // private lateinit var navigationArrow: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subject)
@@ -44,8 +43,6 @@ class SubjectActivity : AppCompatActivity() {
 
     private fun setUpToolbar() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.subjectToolbar)
-//        navigationArrow = findViewById(R.id.navigationArrow)
-
         toolbar?.title = semester
         setSupportActionBar(toolbar)
 
@@ -55,22 +52,24 @@ class SubjectActivity : AppCompatActivity() {
     }
 
     private fun setUpSubjectList() {
-        if(department != null && semester != null) {
+        if (department != null && semester != null) {
             val collectionReference = firestore.collection(department!!)
 
-            collectionReference.document(semester!!).collection("Subjects").addSnapshotListener { value, error ->
-                if(value == null || error != null) {
-                    Toast.makeText(this, "Error fetching data", Toast.LENGTH_SHORT).show()
-                    return@addSnapshotListener
-                }
+            collectionReference.document(semester!!).collection("Subjects")
+                .addSnapshotListener { value, error ->
+                    if (value == null || error != null) {
+                        Toast.makeText(this, "Error fetching data", Toast.LENGTH_SHORT).show()
+                        return@addSnapshotListener
+                    }
 
-                subjectList.clear()
-                subjectList.addAll(value.toObjects(Subject::class.java))
-                adapter.notifyDataSetChanged()
-            }
+                    subjectList.clear()
+                    subjectList.addAll(value.toObjects(Subject::class.java))
+                    adapter.notifyDataSetChanged()
+                }
 
         }
     }
+
     private fun setUpRecyclerView() {
         val semesterRecyclerView = findViewById<RecyclerView>(R.id.subjectRecyclerView)
         adapter = SubjectAdapter(this, subjectList)
