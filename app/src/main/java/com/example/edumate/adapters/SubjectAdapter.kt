@@ -1,6 +1,7 @@
 package com.example.edumate.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.edumate.R
+import com.example.edumate.activities.NotesActivity
+import com.example.edumate.activities.SubjectActivity
 import com.example.edumate.models.Subject
 
 class SubjectAdapter(private var context: Context, private val subject: List<Subject>) :
@@ -34,5 +37,13 @@ class SubjectAdapter(private var context: Context, private val subject: List<Sub
         Glide.with(context)
             .load(subject[position].iconUrl)
             .into(holder.iconView)
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, NotesActivity::class.java)
+            intent.putExtra("TITLE", subject[position].subjectName)
+            intent.putExtra("SEMESTER", subject[position].semester)
+            intent.putExtra("DEPARTMENT", subject[position].department)
+            context.startActivity(intent)
+        }
     }
 }
