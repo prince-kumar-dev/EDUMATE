@@ -6,12 +6,12 @@
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/departmentCardContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
-        android:elevation="16dp"
+        app:cardElevation="1dp"
         app:cardCornerRadius="8dp"
         android:layout_margin="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,6 +43,6 @@
                 android:textColor="@color/black1"
                 tools:text="10/01/2024" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

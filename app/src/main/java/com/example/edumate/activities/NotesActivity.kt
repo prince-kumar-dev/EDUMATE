@@ -13,9 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class NotesActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
-    private val notesParentList = ArrayList<NotesParentItem>()
-    private val notesChildrenList = ArrayList<NotesChildItem>()
+    private val notesParentList = mutableListOf<NotesParentItem>()
     private lateinit var adapter: NotesParentAdapter
     private lateinit var firestore: FirebaseFirestore
     private var semester: String? = null
@@ -34,53 +32,88 @@ class NotesActivity : AppCompatActivity() {
     }
 
     private fun setUpViews() {
-        setUpRecyclerView()
         setUpNotesList()
+        setUpToolbar()
+        setUpRecyclerView()
+    }
+
+    private fun setUpToolbar() {
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.notesToolbar)
+        toolbar?.title = subject
+        setSupportActionBar(toolbar)
+
+        toolbar?.setNavigationOnClickListener {
+            finish()
+        }
     }
 
     private fun setUpNotesList() {
-        if (department != null && semester != null && subject != null) {
-            val collectionReference = firestore.collection(department!!)
-            collectionReference.document(semester!!).collection("Subjects").document(subject!!)
-                .collection("Books")
-                .addSnapshotListener { value, error ->
-                    if (value == null || error != null) {
-                        Toast.makeText(this, "Error fetching data", Toast.LENGTH_SHORT).show()
-                        return@addSnapshotListener
-                    }
-                    notesChildrenList.clear()
-                    notesChildrenList.addAll(value.toObjects(NotesChildItem::class.java))
-                    adapter.notifyDataSetChanged()
-                    notesParentList.add(
-                        NotesParentItem(
-                            "Books",
-                            R.drawable.book,
-                            notesChildrenList
-                        )
-                    )
+        for (i in 1..3) {
+            val notesChildrenList = mutableListOf<NotesChildItem>()
+            var coll: String = when (i) {
+                1 -> {
+                    "Books"
                 }
-        }
+                2 -> {
+                    "Handwritten Notes"
+                }
+                else -> {
+                    "Teacher's Notes"
+                }
+            }
 
-        if (department != null && semester != null && subject != null) {
-            val collectionReference = firestore.collection(department!!)
-            collectionReference.document(semester!!).collection("Subjects").document(subject!!)
-                .collection("Handwritten Notes")
-                .addSnapshotListener { value, error ->
-                    if (value == null || error != null) {
-                        Toast.makeText(this, "Error fetching data", Toast.LENGTH_SHORT).show()
-                        return@addSnapshotListener
+            if(subject == "Exam") {
+                coll = "Exam"
+            }
+
+            if (department != null && semester != null && subject != null) {
+                val collectionReference = firestore.collection(department!!)
+                collectionReference.document(semester!!).collection("Subjects")
+                    .document(subject!!)
+                    .collection(coll)
+                    .addSnapshotListener { value, error ->
+                        if (value == null || error != null) {
+                            Toast.makeText(this, "Error fetching data", Toast.LENGTH_SHORT)
+                                .show()
+                            return@addSnapshotListener
+                        }
+                        notesChildrenList.clear()
+                        notesChildrenList.addAll(value.toObjects(NotesChildItem::class.java))
+                        if (notesChildrenList.isNotEmpty()) {
+
+                            when (i) {
+                                1 -> {
+                                    notesParentList.add(
+                                        NotesParentItem(
+                                            coll,
+                                            R.drawable.book_notes,
+                                            notesChildrenList
+                                        )
+                                    )
+                                }
+                                2 -> {
+                                    notesParentList.add(
+                                        NotesParentItem(
+                                            coll,
+                                            R.drawable.handwritting_notes,
+                                            notesChildrenList
+                                        )
+                                    )
+                                }
+                                else -> {
+                                    notesParentList.add(
+                                        NotesParentItem(
+                                            coll,
+                                            R.drawable.teacher_notes,
+                                            notesChildrenList
+                                        )
+                                    )
+                                }
+                            }
+                        }
+                        adapter.notifyDataSetChanged()
                     }
-                    notesChildrenList.clear()
-                    notesChildrenList.addAll(value.toObjects(NotesChildItem::class.java))
-                    adapter.notifyDataSetChanged()
-                }
-            notesParentList.add(
-                NotesParentItem(
-                    "Handwritten Notes",
-                    R.drawable.bca_branch,
-                    notesChildrenList
-                )
-            )
+            }
         }
     }
 
