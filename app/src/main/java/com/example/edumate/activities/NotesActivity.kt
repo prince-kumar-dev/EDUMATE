@@ -1,50 +1,93 @@
 package com.example.edumate.activities
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.edumate.R
 import com.example.edumate.adapters.NotesParentAdapter
 import com.example.edumate.models.NotesChildItem
 import com.example.edumate.models.NotesParentItem
+import com.google.firebase.firestore.FirebaseFirestore
 
 class NotesActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private val notesParentList = ArrayList<NotesParentItem>()
+    private val notesChildrenList = ArrayList<NotesChildItem>()
+    private lateinit var adapter: NotesParentAdapter
+    private lateinit var firestore: FirebaseFirestore
+    private var semester: String? = null
+    private var department: String? = null
+    private var subject: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_notes)
 
-        recyclerView = findViewById(R.id.notesParentRecyclerView)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        firestore = FirebaseFirestore.getInstance()
+        subject = intent.getStringExtra("TITLE")
+        semester = intent.getStringExtra("SEMESTER")
+        department = intent.getStringExtra("DEPARTMENT")
 
-        addDataToList()
-        val adapter = NotesParentAdapter(notesParentList)
-        recyclerView.adapter = adapter
+        setUpViews()
     }
 
-    private fun addDataToList() {
-        val notesChildItem1 = ArrayList<NotesChildItem>()
-        notesChildItem1.add(NotesChildItem("C", R.drawable.book))
-        notesChildItem1.add(NotesChildItem("C++", R.drawable.bca_branch))
-        notesChildItem1.add(NotesChildItem("Java", R.drawable.article))
-        notesChildItem1.add(NotesChildItem("Python", R.drawable.cse_branch))
+    private fun setUpViews() {
+        setUpRecyclerView()
+        setUpNotesList()
+    }
 
-        notesParentList.add(NotesParentItem("Game Development", R.drawable.ece_branch, notesChildItem1))
+    private fun setUpNotesList() {
+        if (department != null && semester != null && subject != null) {
+            val collectionReference = firestore.collection(department!!)
+            collectionReference.document(semester!!).collection("Subjects").document(subject!!)
+                .collection("Books")
+                .addSnapshotListener { value, error ->
+                    if (value == null || error != null) {
+                        Toast.makeText(this, "Error fetching data", Toast.LENGTH_SHORT).show()
+                        return@addSnapshotListener
+                    }
+                    notesChildrenList.clear()
+                    notesChildrenList.addAll(value.toObjects(NotesChildItem::class.java))
+                    adapter.notifyDataSetChanged()
+                    notesParentList.add(
+                        NotesParentItem(
+                            "Books",
+                            R.drawable.book,
+                            notesChildrenList
+                        )
+                    )
+                }
+        }
 
-        notesParentList.add(NotesParentItem("Data Science", R.drawable.forget_password, notesChildItem1))
+        if (department != null && semester != null && subject != null) {
+            val collectionReference = firestore.collection(department!!)
+            collectionReference.document(semester!!).collection("Subjects").document(subject!!)
+                .collection("Handwritten Notes")
+                .addSnapshotListener { value, error ->
+                    if (value == null || error != null) {
+                        Toast.makeText(this, "Error fetching data", Toast.LENGTH_SHORT).show()
+                        return@addSnapshotListener
+                    }
+                    notesChildrenList.clear()
+                    notesChildrenList.addAll(value.toObjects(NotesChildItem::class.java))
+                    adapter.notifyDataSetChanged()
+                }
+            notesParentList.add(
+                NotesParentItem(
+                    "Handwritten Notes",
+                    R.drawable.bca_branch,
+                    notesChildrenList
+                )
+            )
+        }
+    }
 
-        notesParentList.add(NotesParentItem("Programming", R.drawable.it_branch, notesChildItem1))
-
-        notesParentList.add(NotesParentItem("Programming", R.drawable.it, notesChildItem1))
-
-        notesParentList.add(NotesParentItem("Programming", R.drawable.home, notesChildItem1))
+    private fun setUpRecyclerView() {
+        val notesRecyclerView = findViewById<RecyclerView>(R.id.notesParentRecyclerView)
+        adapter = NotesParentAdapter(this, notesParentList)
+        notesRecyclerView.layoutManager = LinearLayoutManager(this)
+        notesRecyclerView.adapter = adapter
     }
 }

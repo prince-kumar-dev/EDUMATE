@@ -1,16 +1,18 @@
 package com.example.edumate.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.edumate.R
 import com.example.edumate.models.NotesParentItem
 
-class NotesParentAdapter(private val notesParentList: List<NotesParentItem>):
+class NotesParentAdapter(val context: Context, private val notesParentList: List<NotesParentItem>):
     RecyclerView.Adapter<NotesParentAdapter.NotesParentViewHolder>(){
 
     inner class NotesParentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -34,8 +36,8 @@ class NotesParentAdapter(private val notesParentList: List<NotesParentItem>):
         holder.titleTv.text = parentItem.title
 
         holder.childRecyclerView.setHasFixedSize(true)
-        holder.childRecyclerView.layoutManager = GridLayoutManager(holder.itemView.context, 3)
-        val adapter = NotesChildAdapter(parentItem.mList)
+        holder.childRecyclerView.layoutManager = LinearLayoutManager(holder.itemView.context)
+        val adapter = NotesChildAdapter(context, parentItem.mList)
         holder.childRecyclerView.adapter = adapter
     }
 }

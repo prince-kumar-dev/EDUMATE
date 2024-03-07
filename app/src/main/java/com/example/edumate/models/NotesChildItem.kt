@@ -1,6 +1,7 @@
 package com.example.edumate.models
 
 data class NotesChildItem(
-    val title: String,
-    val logo: Int
+    val id: String = "",
+    val title: String = "",
+    val url: String = "",
 )

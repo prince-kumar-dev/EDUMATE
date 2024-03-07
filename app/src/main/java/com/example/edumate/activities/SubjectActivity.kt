@@ -1,20 +1,12 @@
 package com.example.edumate.activities
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageButton
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.edumate.R
-import com.example.edumate.adapters.SemesterAdapter
 import com.example.edumate.adapters.SubjectAdapter
-import com.example.edumate.models.Semester
 import com.example.edumate.models.Subject
 import com.google.firebase.firestore.FirebaseFirestore
 
