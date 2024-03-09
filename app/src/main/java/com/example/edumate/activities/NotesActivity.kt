@@ -62,7 +62,7 @@ class NotesActivity : AppCompatActivity() {
                 }
             }
 
-            if(subject == "Exam") {
+            if(subject == "MST & PTU Final") {
                 coll = "Exam"
             }
 
@@ -83,6 +83,21 @@ class NotesActivity : AppCompatActivity() {
 
                             when (i) {
                                 1 -> {
+                                    if(notesParentList.contains(
+                                            NotesParentItem(
+                                                coll,
+                                                R.drawable.book_notes,
+                                                notesChildrenList
+                                            )
+                                        )) {
+                                        notesParentList.remove(
+                                            NotesParentItem(
+                                                coll,
+                                                R.drawable.book_notes,
+                                                notesChildrenList
+                                            )
+                                        )
+                                    }
                                     notesParentList.add(
                                         NotesParentItem(
                                             coll,
@@ -92,6 +107,21 @@ class NotesActivity : AppCompatActivity() {
                                     )
                                 }
                                 2 -> {
+                                    if(notesParentList.contains(
+                                            NotesParentItem(
+                                                coll,
+                                                R.drawable.handwritting_notes,
+                                                notesChildrenList
+                                            )
+                                        )) {
+                                        notesParentList.remove(
+                                            NotesParentItem(
+                                                coll,
+                                                R.drawable.handwritting_notes,
+                                                notesChildrenList
+                                            )
+                                        )
+                                    }
                                     notesParentList.add(
                                         NotesParentItem(
                                             coll,
@@ -101,6 +131,21 @@ class NotesActivity : AppCompatActivity() {
                                     )
                                 }
                                 else -> {
+                                    if(notesParentList.contains(
+                                            NotesParentItem(
+                                                coll,
+                                                R.drawable.teacher_notes,
+                                                notesChildrenList
+                                            )
+                                        )) {
+                                        notesParentList.remove(
+                                            NotesParentItem(
+                                                coll,
+                                                R.drawable.teacher_notes,
+                                                notesChildrenList
+                                            )
+                                        )
+                                    }
                                     notesParentList.add(
                                         NotesParentItem(
                                             coll,
@@ -113,6 +158,9 @@ class NotesActivity : AppCompatActivity() {
                         }
                         adapter.notifyDataSetChanged()
                     }
+            }
+            if(subject == "MST & PTU Final") {
+                break
             }
         }
     }

@@ -28,8 +28,8 @@
 
             <ImageView
                 android:id="@+id/departmentIcon"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/svg_loving" />
 
             <TextView
