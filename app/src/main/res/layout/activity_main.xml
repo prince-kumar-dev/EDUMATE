@@ -138,32 +138,92 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_margin="16dp"
+                            android:src="@drawable/youtube_logo"
+                            tools:ignore="ContentDescription" />
 
                         <TextView
                             android:id="@+id/studyPlaylistTxt"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_weight="1"
                             android:fontFamily="@font/inter_semibold"
                             android:text="@string/study_playlist"
                             android:textColor="@color/black1"
-                            android:textSize="24sp"
+                            android:textSize="22sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/departmentCardView" />
 
-                        <ListView
-                            android:id="@+id/studyPlaylistView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                        <ImageView
+                            android:id="@+id/studyPlaylistArrow"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
                             android:layout_margin="16dp"
+                            android:src="@drawable/arrow_right"
+                            tools:ignore="ContentDescription" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/placementCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:backgroundTint="@color/white"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/studyPlaylistCardView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_margin="16dp"
+                            android:src="@drawable/graduation_degree"
+                            tools:ignore="ContentDescription" />
+
+                        <TextView
+                            android:id="@+id/placementTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/inter_semibold"
+                            android:text="Placement Series"
+                            android:textColor="@color/black1"
+                            android:textSize="22sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/studyTxt" />
+                            app:layout_constraintTop_toBottomOf="@+id/departmentCardView" />
+
+                        <ImageView
+                            android:id="@+id/placementArrow"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_margin="16dp"
+                            android:src="@drawable/arrow_right"
+                            tools:ignore="ContentDescription" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -177,6 +237,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/drawer_layout"
-        app:menu="@menu/drawer_menu"/>
+        app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

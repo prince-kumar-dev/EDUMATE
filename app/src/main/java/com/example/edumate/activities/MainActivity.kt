@@ -1,9 +1,13 @@
 package com.example.edumate.activities
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.HorizontalScrollView
+import android.widget.ImageView
+import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,15 +18,20 @@ import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.edumate.R
 import com.example.edumate.adapters.DepartmentAdapter
+import com.example.edumate.adapters.StudyPlaylistAdapter
 import com.example.edumate.models.Department
+import com.example.edumate.models.StudyPlaylist
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var firestore: FirebaseFirestore
-    private lateinit var adapter: DepartmentAdapter
+    private lateinit var departmentAdapter: DepartmentAdapter
     private var departmentList = mutableListOf<Department>()
+    private lateinit var playlistAdapter: StudyPlaylistAdapter
+    private var playlistArrayList = mutableListOf<StudyPlaylist>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -64,13 +73,23 @@ class MainActivity : AppCompatActivity() {
         setUpDepartment()
         setUpDrawerLayout()
         setUpDepartmentRecyclerview()
+        setUpStudyPlaylist()
+    }
+
+    private fun setUpStudyPlaylist() {
+        val listViewArrow: ImageView = findViewById(R.id.studyPlaylistArrow)
+
+        listViewArrow.setOnClickListener {
+            val intent = Intent(this, StudyPlaylistActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setUpDepartmentRecyclerview() {
         val departmentRecyclerView = findViewById<RecyclerView>(R.id.departmentRecyclerView)
-        adapter = DepartmentAdapter(this, departmentList)
+        departmentAdapter = DepartmentAdapter(this, departmentList)
         departmentRecyclerView.layoutManager = GridLayoutManager(this, 3)
-        departmentRecyclerView.adapter = adapter
+        departmentRecyclerView.adapter = departmentAdapter
     }
 
     private fun setUpDepartment() {
@@ -84,7 +103,7 @@ class MainActivity : AppCompatActivity() {
             }
             departmentList.clear()
             departmentList.addAll(value.toObjects(Department::class.java))
-            adapter.notifyDataSetChanged()
+            departmentAdapter.notifyDataSetChanged()
         }
     }
 

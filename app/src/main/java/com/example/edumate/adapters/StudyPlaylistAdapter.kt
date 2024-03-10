@@ -1,28 +1,44 @@
 package com.example.edumate.adapters
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.example.edumate.R
 import com.example.edumate.models.StudyPlaylist
 
-class StudyPlaylistAdapter(private val context: Context, private val studyPlaylist: ArrayList<StudyPlaylist>):
-    ArrayAdapter<StudyPlaylist>(context, R.layout.list_item){
+class StudyPlaylistAdapter(private val context: Context, private var studyPlaylist: List<StudyPlaylist>) :
+    RecyclerView.Adapter<StudyPlaylistAdapter.StudyPlaylistViewHolder>(){
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+    inner class StudyPlaylistViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val studyPlaylistTitle: TextView = itemView.findViewById(R.id.studyPlaylistTxt)
+    }
 
-        val inflater: LayoutInflater = LayoutInflater.from(context)
-        val view: View = inflater.inflate(R.layout.list_item, null)
+    fun setFilteredList(studyPlaylist: List<StudyPlaylist>) {
+        this.studyPlaylist = studyPlaylist
+        notifyDataSetChanged()
+    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudyPlaylistViewHolder {
+        val view = LayoutInflater.from(context).inflate(R.layout.study_playlist_item, parent, false)
+        return StudyPlaylistViewHolder(view)
+    }
 
-        val playlistTitle: TextView = view.findViewById(R.id.playlistTxt)
+    override fun getItemCount(): Int {
+        return studyPlaylist.size
+    }
 
-        playlistTitle.text = studyPlaylist[position].title
+    override fun onBindViewHolder(holder: StudyPlaylistViewHolder, position: Int) {
+        holder.studyPlaylistTitle.text = studyPlaylist[position].title
 
-
-
-        return view
+        holder.itemView.setOnClickListener {
+            val uri = Uri.parse(studyPlaylist[position].url)
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            context.startActivity(intent)
+        }
     }
 }

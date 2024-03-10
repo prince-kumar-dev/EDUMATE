@@ -15,6 +15,12 @@
         android:theme="@style/Theme.EduMate"
         tools:targetApi="31">
         <activity
+            android:name=".activities.PlacementSeriesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.StudyPlaylistActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.NotesActivity"
             android:exported="false" />
         <activity
