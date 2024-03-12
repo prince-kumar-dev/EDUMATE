@@ -47,6 +47,8 @@ dependencies {
     implementation("com.google.firebase:firebase-database:20.3.1")
     implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation("androidx.activity:activity-ktx:1.8.2")
+    implementation ("com.intuit.sdp:sdp-android:1.1.0")
     implementation("androidx.activity:activity:1.8.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -9,46 +9,56 @@
         android:id="@+id/semesterCardContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         app:cardBackgroundColor="@color/white"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        app:layout_constraintDimensionRatio="1:4"
         app:cardCornerRadius="4dp"
-        app:cardUseCompatPadding="true"
         app:cardElevation="1dp"
+        app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+            android:gravity="center">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
+                app:layout_constraintDimensionRatio="1.5:1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/book" />
 
-            <TextView
-                android:id="@+id/semesterName"
-                android:layout_width="match_parent"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="5dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.20" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/semesterName"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:fontFamily="@font/inter_semibold"
-                android:text=""
                 android:gravity="center"
+                android:text=""
                 android:textColor="@color/black1"
-                android:textSize="18sp"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark" />
-        </LinearLayout>
+                android:textSize="@dimen/_14sdp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

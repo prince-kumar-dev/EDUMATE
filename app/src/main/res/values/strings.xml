@@ -33,4 +33,6 @@
     <string name="share">Share</string>
     <string name="contact_us">Contact Us</string>
     <string name="study_playlist">Study Playlist</string>
+    <string name="coding_playlist">Coding Playlist</string>
+    <string name="placement_series">Placement Series</string>
 </resources>

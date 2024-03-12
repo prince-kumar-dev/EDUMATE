@@ -9,17 +9,22 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/notesChildTitleTv"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
             android:text="Language"
+            android:gravity="center"
             android:textColor="@color/black1"
             android:fontFamily="@font/inter_semibold"
-            android:textSize="14sp"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

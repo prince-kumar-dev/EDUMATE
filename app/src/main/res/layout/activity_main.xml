@@ -62,7 +62,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp">
 
                 <com.denzcoskun.imageslider.ImageSlider
                     android:id="@+id/imageSlider"
@@ -78,7 +79,9 @@
                     app:iss_placeholder="@color/gray1"
                     app:iss_selected_dot="@drawable/default_selected_dot"
                     app:iss_unselected_dot="@drawable/default_unselected_dot"
+                    app:layout_constraintBottom_toTopOf="@+id/departmentCardView"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,38 +93,49 @@
                     android:backgroundTint="@color/white"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="5dp"
+                    app:layout_constraintBottom_toTopOf="@+id/studyPlaylistCardView"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageSlider">
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/departmentTxt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/_16sdp"
                             android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
                             android:layout_marginEnd="16dp"
                             android:fontFamily="@font/inter_semibold"
                             android:text="@string/department"
                             android:textColor="@color/black1"
-                            android:textSize="24sp"
+                            app:layout_constraintBottom_toTopOf="@+id/guidelineDepartment"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/imageSlider" />
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineDepartment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_percent="0.15"/>
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/departmentRecyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/departmentTxt" />
-                    </LinearLayout>
+                            app:layout_constraintTop_toBottomOf="@+id/guidelineDepartment" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -132,47 +146,156 @@
                     android:backgroundTint="@color/white"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="5dp"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintBottom_toTopOf="@+id/codingPlaylistCardView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/departmentCardView">
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content">
 
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:id="@+id/youtubeLogo"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
                             android:layout_margin="16dp"
                             android:src="@drawable/youtube_logo"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintDimensionRatio="1:1"
+                            app:layout_constraintEnd_toStartOf="@+id/studyPlaylistTxt"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="ContentDescription" />
 
-                        <TextView
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineStudyPlaylist1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintGuide_percent="0.20"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/studyPlaylistTxt"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_marginTop="16dp"
-                            android:layout_marginEnd="16dp"
                             android:layout_marginBottom="16dp"
-                            android:layout_weight="1"
+                            android:textSize="@dimen/_16sdp"
                             android:fontFamily="@font/inter_semibold"
+                            android:gravity="center_vertical"
                             android:text="@string/study_playlist"
                             android:textColor="@color/black1"
-                            android:textSize="22sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/studyPlaylistArrow"
+                            app:layout_constraintStart_toEndOf="@+id/youtubeLogo"
+                            app:layout_constraintStart_toStartOf="@+id/guidelineStudyPlaylist1"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineStudyPlaylist2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/departmentCardView" />
+                            app:layout_constraintGuide_percent="0.82"
+                            app:layout_constraintStart_toStartOf="parent" />
 
                         <ImageView
                             android:id="@+id/studyPlaylistArrow"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:src="@drawable/arrow_right"
+                            android:layout_margin="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/guidelineStudyPlaylist2"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="ContentDescription" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/codingPlaylistCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:backgroundTint="@color/white"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintBottom_toTopOf="@+id/placementCardView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/studyPlaylistCardView">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_margin="16dp"
+                            android:src="@drawable/youtube_logo"
+                            app:layout_constraintDimensionRatio="1:1"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/guidelineCodingPlaylist1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="ContentDescription" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineCodingPlaylist1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintGuide_percent="0.20"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/codingPlaylistTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:fontFamily="@font/inter_semibold"
+                            android:gravity="center_vertical"
+                            android:text="@string/coding_playlist"
+                            android:textColor="@color/black1"
+                            android:textSize="@dimen/_16sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/guidelineCodingPlaylist2"
+                            app:layout_constraintStart_toStartOf="@+id/guidelineCodingPlaylist1"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineCodingPlaylist2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintGuide_percent="0.82"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/codingPlaylistArrow"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
                             android:layout_margin="16dp"
                             android:src="@drawable/arrow_right"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/codingPlaylistTxt"
+                            app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="ContentDescription" />
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -185,46 +308,75 @@
                     app:cardElevation="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/studyPlaylistCardView">
+                    app:layout_constraintTop_toBottomOf="@+id/codingPlaylistCardView">
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:id="@+id/imageView3"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
                             android:layout_margin="16dp"
                             android:src="@drawable/graduation_degree"
+                            app:layout_constraintDimensionRatio="1:1"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/guidelinePlacementSeries1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="ContentDescription" />
 
-                        <TextView
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelinePlacementSeries1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintGuide_percent="0.20"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/placementTxt"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_marginTop="16dp"
-                            android:layout_marginEnd="16dp"
                             android:layout_marginBottom="16dp"
-                            android:layout_weight="1"
                             android:fontFamily="@font/inter_semibold"
-                            android:text="Placement Series"
+                            android:gravity="center_vertical"
+                            android:text="@string/placement_series"
                             android:textColor="@color/black1"
-                            android:textSize="22sp"
+                            android:textSize="@dimen/_16sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/guidelinePlacementSeries2"
+                            app:layout_constraintStart_toStartOf="@+id/guidelinePlacementSeries1"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelinePlacementSeries2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/departmentCardView" />
+                            app:layout_constraintGuide_percent="0.82"
+                            app:layout_constraintStart_toStartOf="parent" />
 
                         <ImageView
                             android:id="@+id/placementArrow"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
                             android:layout_margin="16dp"
                             android:src="@drawable/arrow_right"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/placementTxt"
+                            app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="ContentDescription" />
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,18 +8,19 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/departmentCardContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:backgroundTint="@color/white"
         app:cardElevation="1dp"
         app:cardCornerRadius="8dp"
-        android:layout_margin="8dp"
+        android:layout_margin="4dp"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
@@ -28,21 +29,51 @@
 
             <ImageView
                 android:id="@+id/departmentIcon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/svg_loving" />
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/svg_loving"
+                app:layout_constraintBottom_toTopOf="@+id/departmentTitle"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="@+id/guideline1"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/departmentTitle"
-                android:layout_width="match_parent"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.25"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.60"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/departmentTitle"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:fontFamily="@font/inter_semibold"
                 android:gravity="center"
-                android:padding="5dp"
+                android:textSize="@dimen/_12sdp"
                 android:textColor="@color/black1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guideline3"
                 tools:text="10/01/2024" />
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

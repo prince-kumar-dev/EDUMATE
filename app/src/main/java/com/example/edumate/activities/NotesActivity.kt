@@ -48,22 +48,27 @@ class NotesActivity : AppCompatActivity() {
     }
 
     private fun setUpNotesList() {
-        for (i in 1..3) {
+        for (i in 1..5) {
             val notesChildrenList = mutableListOf<NotesChildItem>()
-            var coll: String = when (i) {
+            val coll: String = when (i) {
                 1 -> {
-                    "Books"
+                    "Important Questions"
                 }
                 2 -> {
+                    "Lab Files"
+                }
+                3 -> {
+                    "Books"
+                }
+                4 -> {
                     "Handwritten Notes"
                 }
-                else -> {
+                5 -> {
                     "Teacher's Notes"
                 }
-            }
-
-            if(subject == "MST & PTU Final") {
-                coll = "Exam"
+                else -> {
+                    "More Stuffs"
+                }
             }
 
             if (department != null && semester != null && subject != null) {
@@ -83,6 +88,54 @@ class NotesActivity : AppCompatActivity() {
 
                             when (i) {
                                 1 -> {
+                                    if(notesParentList.contains(
+                                            NotesParentItem(
+                                                coll,
+                                                R.drawable.important_questions,
+                                                notesChildrenList
+                                            )
+                                        )) {
+                                        notesParentList.remove(
+                                            NotesParentItem(
+                                                coll,
+                                                R.drawable.important_questions,
+                                                notesChildrenList
+                                            )
+                                        )
+                                    }
+                                    notesParentList.add(
+                                        NotesParentItem(
+                                            coll,
+                                            R.drawable.important_questions,
+                                            notesChildrenList
+                                        )
+                                    )
+                                }
+                                2 -> {
+                                    if(notesParentList.contains(
+                                            NotesParentItem(
+                                                coll,
+                                                R.drawable.lab_file,
+                                                notesChildrenList
+                                            )
+                                        )) {
+                                        notesParentList.remove(
+                                            NotesParentItem(
+                                                coll,
+                                                R.drawable.lab_file,
+                                                notesChildrenList
+                                            )
+                                        )
+                                    }
+                                    notesParentList.add(
+                                        NotesParentItem(
+                                            coll,
+                                            R.drawable.lab_file,
+                                            notesChildrenList
+                                        )
+                                    )
+                                }
+                                3 -> {
                                     if(notesParentList.contains(
                                             NotesParentItem(
                                                 coll,
@@ -106,7 +159,7 @@ class NotesActivity : AppCompatActivity() {
                                         )
                                     )
                                 }
-                                2 -> {
+                                4 -> {
                                     if(notesParentList.contains(
                                             NotesParentItem(
                                                 coll,
@@ -130,7 +183,7 @@ class NotesActivity : AppCompatActivity() {
                                         )
                                     )
                                 }
-                                else -> {
+                                5 -> {
                                     if(notesParentList.contains(
                                             NotesParentItem(
                                                 coll,
@@ -150,6 +203,30 @@ class NotesActivity : AppCompatActivity() {
                                         NotesParentItem(
                                             coll,
                                             R.drawable.teacher_notes,
+                                            notesChildrenList
+                                        )
+                                    )
+                                }
+                                else -> {
+                                    if(notesParentList.contains(
+                                            NotesParentItem(
+                                                coll,
+                                                R.drawable.book_notes,
+                                                notesChildrenList
+                                            )
+                                        )) {
+                                        notesParentList.remove(
+                                            NotesParentItem(
+                                                coll,
+                                                R.drawable.book_notes,
+                                                notesChildrenList
+                                            )
+                                        )
+                                    }
+                                    notesParentList.add(
+                                        NotesParentItem(
+                                            coll,
+                                            R.drawable.book_notes,
                                             notesChildrenList
                                         )
                                     )

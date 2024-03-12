@@ -74,6 +74,16 @@ class MainActivity : AppCompatActivity() {
         setUpDrawerLayout()
         setUpDepartmentRecyclerview()
         setUpStudyPlaylist()
+        setUpCodingPlaylist()
+    }
+
+    private fun setUpCodingPlaylist() {
+        val listViewArrow: ImageView = findViewById(R.id.codingPlaylistArrow)
+
+        listViewArrow.setOnClickListener {
+            val intent = Intent(this, CodingPlaylistActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setUpStudyPlaylist() {
