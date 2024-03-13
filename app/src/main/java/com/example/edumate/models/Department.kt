@@ -1,7 +1,7 @@
 package com.example.edumate.models
 
 data class Department(
-    var id: String = "",
-    var title: String = "",
-    var iconUrl: String = ""
+    val id: String = "",
+    val title: String = "",
+    val iconUrl: String = ""
 )

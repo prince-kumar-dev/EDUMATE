@@ -75,6 +75,17 @@ class MainActivity : AppCompatActivity() {
         setUpDepartmentRecyclerview()
         setUpStudyPlaylist()
         setUpCodingPlaylist()
+        setUpPlacementSeries()
+    }
+
+    private fun setUpPlacementSeries() {
+
+        val listViewArrow: ImageView = findViewById(R.id.placementArrow)
+
+        listViewArrow.setOnClickListener {
+            val intent = Intent(this, PlacementSeriesActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setUpCodingPlaylist() {

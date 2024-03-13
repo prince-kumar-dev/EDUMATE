@@ -48,17 +48,19 @@ class NotesActivity : AppCompatActivity() {
     }
 
     private fun setUpNotesList() {
+
         for (i in 1..5) {
             val notesChildrenList = mutableListOf<NotesChildItem>()
-            val coll: String = when (i) {
+
+            var coll: String = when (i) {
                 1 -> {
-                    "Important Questions"
+                    "Books"
                 }
                 2 -> {
                     "Lab Files"
                 }
                 3 -> {
-                    "Books"
+                    "Important Questions"
                 }
                 4 -> {
                     "Handwritten Notes"
@@ -69,6 +71,10 @@ class NotesActivity : AppCompatActivity() {
                 else -> {
                     "More Stuffs"
                 }
+            }
+
+            if(subject == "MST & PTU Final") {
+                coll = "Exam"
             }
 
             if (department != null && semester != null && subject != null) {
@@ -85,20 +91,19 @@ class NotesActivity : AppCompatActivity() {
                         notesChildrenList.clear()
                         notesChildrenList.addAll(value.toObjects(NotesChildItem::class.java))
                         if (notesChildrenList.isNotEmpty()) {
-
                             when (i) {
                                 1 -> {
                                     if(notesParentList.contains(
                                             NotesParentItem(
                                                 coll,
-                                                R.drawable.important_questions,
+                                                R.drawable.book_notes,
                                                 notesChildrenList
                                             )
                                         )) {
                                         notesParentList.remove(
                                             NotesParentItem(
                                                 coll,
-                                                R.drawable.important_questions,
+                                                R.drawable.book_notes,
                                                 notesChildrenList
                                             )
                                         )
@@ -106,7 +111,7 @@ class NotesActivity : AppCompatActivity() {
                                     notesParentList.add(
                                         NotesParentItem(
                                             coll,
-                                            R.drawable.important_questions,
+                                            R.drawable.book_notes,
                                             notesChildrenList
                                         )
                                     )
@@ -139,14 +144,14 @@ class NotesActivity : AppCompatActivity() {
                                     if(notesParentList.contains(
                                             NotesParentItem(
                                                 coll,
-                                                R.drawable.book_notes,
+                                                R.drawable.important_questions,
                                                 notesChildrenList
                                             )
                                         )) {
                                         notesParentList.remove(
                                             NotesParentItem(
                                                 coll,
-                                                R.drawable.book_notes,
+                                                R.drawable.important_questions,
                                                 notesChildrenList
                                             )
                                         )
@@ -154,7 +159,7 @@ class NotesActivity : AppCompatActivity() {
                                     notesParentList.add(
                                         NotesParentItem(
                                             coll,
-                                            R.drawable.book_notes,
+                                            R.drawable.important_questions,
                                             notesChildrenList
                                         )
                                     )

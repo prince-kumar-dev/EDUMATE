@@ -37,9 +37,6 @@ class NotesChildAdapter(val context: Context,
         holder.title.text = notesChildList[position].title
 
         holder.itemView.setOnClickListener {
-//            val openUrl = Intent(android.content.Intent.ACTION_VIEW)
-//            openUrl.data = Uri.parse(notesChildList[position].url)
-//            startActivity(openUrl)
             val uri = Uri.parse(notesChildList[position].url)
             val intent = Intent(Intent.ACTION_VIEW, uri)
             context.startActivity(intent)

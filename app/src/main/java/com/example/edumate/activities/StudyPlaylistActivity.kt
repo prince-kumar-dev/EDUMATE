@@ -80,6 +80,7 @@ class StudyPlaylistActivity : AppCompatActivity() {
             studyPlaylistList.clear()
             studyPlaylistList.addAll(value.toObjects(StudyPlaylist::class.java))
             adapter.notifyDataSetChanged()
+
         }
     }
 
