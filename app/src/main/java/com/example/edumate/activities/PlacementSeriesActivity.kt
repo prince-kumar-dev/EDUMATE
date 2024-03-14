@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.edumate.R
 import com.example.edumate.adapters.PlacementSeriesParentAdapter
-import com.example.edumate.models.NotesParentItem
 import com.example.edumate.models.PlacementChildItem
 import com.example.edumate.models.PlacementParentItem
 import com.google.firebase.firestore.FirebaseFirestore
@@ -61,7 +60,7 @@ class PlacementSeriesActivity : AppCompatActivity() {
                         if (placementSeriesParentList.contains(
                                 PlacementParentItem(
                                     document.id,
-                                    R.drawable.placement,
+                                    R.drawable.company,
                                     placementSeriesChildList
                                 )
                             )
@@ -69,7 +68,7 @@ class PlacementSeriesActivity : AppCompatActivity() {
                             placementSeriesParentList.remove(
                                 PlacementParentItem(
                                     document.id,
-                                    R.drawable.placement,
+                                    R.drawable.company,
                                     placementSeriesChildList
                                 )
                             )
@@ -77,7 +76,7 @@ class PlacementSeriesActivity : AppCompatActivity() {
                         placementSeriesParentList.add(
                             PlacementParentItem(
                                 document.id,
-                                R.drawable.placement,
+                                R.drawable.company,
                                 placementSeriesChildList
                             )
                         )
