@@ -1,46 +1,44 @@
 package com.example.edumate.activities
 
 import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.HorizontalScrollView
 import android.widget.ImageView
-import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.edumate.R
 import com.example.edumate.adapters.DepartmentAdapter
-import com.example.edumate.adapters.StudyPlaylistAdapter
 import com.example.edumate.models.Department
-import com.example.edumate.models.StudyPlaylist
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+    private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
     private lateinit var departmentAdapter: DepartmentAdapter
     private var departmentList = mutableListOf<Department>()
-    private lateinit var playlistAdapter: StudyPlaylistAdapter
-    private var playlistArrayList = mutableListOf<StudyPlaylist>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
 
-        setUpViews()
+        setUpViews() // Call method to set up views
 
         val imageSlider = findViewById<ImageSlider>(R.id.imageSlider)
         val imageList = ArrayList<SlideModel>()
+        // Prepare image list for the image slider
+
+        // Prepare image list for the image slider
         imageList.add(
             SlideModel(
                 "https://th.bing.com/th/id/OIP.v7gEKUNUq-Jy-ARL41hoxAHaE7?rs=1&pid=ImgDetMain",
@@ -66,10 +64,13 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
+        // Add more images as needed
+        // Set up the image slider with the prepared image list
         imageSlider.setImageList(imageList, ScaleTypes.FIT)
     }
 
     private fun setUpViews() {
+        // Call methods to set up various components of the activity
         setUpDepartment()
         setUpDrawerLayout()
         setUpDepartmentRecyclerview()
@@ -79,7 +80,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpPlacementSeries() {
-
+        // Set up onClickListener for navigating to PlacementSeriesActivity
         val listViewArrow: ImageView = findViewById(R.id.placementArrow)
 
         listViewArrow.setOnClickListener {
@@ -88,6 +89,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Add similar methods for setting up other functionalities
     private fun setUpCodingPlaylist() {
         val listViewArrow: ImageView = findViewById(R.id.codingPlaylistArrow)
 
@@ -107,6 +109,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpDepartmentRecyclerview() {
+        // Set up RecyclerView for displaying departments
         val departmentRecyclerView = findViewById<RecyclerView>(R.id.departmentRecyclerView)
         departmentAdapter = DepartmentAdapter(this, departmentList)
         departmentRecyclerView.layoutManager = GridLayoutManager(this, 3)
@@ -114,7 +117,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpDepartment() {
-
+        // Fetch departments data from Firestore and populate the list
         val collectionReference = firestore.collection("Departments List")
 
         collectionReference.addSnapshotListener { value, error ->
@@ -129,16 +132,139 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpDrawerLayout() {
+        // Set up navigation drawer
         val appBar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.appBar)
         val mainDrawer = findViewById<androidx.drawerlayout.widget.DrawerLayout>(R.id.mainDrawer)
+        val navigationView =
+            findViewById<com.google.android.material.navigation.NavigationView>(R.id.navigationView)
         setSupportActionBar(appBar)
 
+        // Set up navigation drawer
         actionBarDrawerToggle =
-            ActionBarDrawerToggle(this, mainDrawer, R.string.app_name, R.string.app_name)
+            ActionBarDrawerToggle(this, mainDrawer, R.string.open, R.string.close)
         actionBarDrawerToggle.syncState()
+
+        // Set up item click listener for navigation menu items
+        navigationView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                // Handle different menu items
+                R.id.placement -> {
+                    val intent = Intent(this, PlacementSeriesActivity::class.java)
+                    startActivity(intent)
+                    mainDrawer.closeDrawers()
+                    true
+                }
+
+                R.id.articles -> {
+                    Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()
+                    true
+                }
+
+                R.id.r_and_d -> {
+                    Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()
+                    true
+                }
+
+                R.id.studyPlaylist -> {
+                    val intent = Intent(this, StudyPlaylistActivity::class.java)
+                    startActivity(intent)
+                    mainDrawer.closeDrawers()
+                    true
+                }
+
+                R.id.codingPlaylist -> {
+                    val intent = Intent(this, CodingPlaylistActivity::class.java)
+                    startActivity(intent)
+                    mainDrawer.closeDrawers()
+                    true
+                }
+
+                R.id.cse -> {
+                    val intent = Intent(this, SemesterActivity::class.java)
+                    intent.putExtra("TITLE", "CSE")
+                    startActivity(intent)
+                    mainDrawer.closeDrawers()
+                    true
+                }
+
+                R.id.it -> {
+                    val intent = Intent(this, SemesterActivity::class.java)
+                    intent.putExtra("TITLE", "IT")
+                    startActivity(intent)
+                    mainDrawer.closeDrawers()
+                    true
+                }
+
+                R.id.ece -> {
+                    val intent = Intent(this, SemesterActivity::class.java)
+                    intent.putExtra("TITLE", "ECE")
+                    startActivity(intent)
+                    mainDrawer.closeDrawers()
+                    true
+                }
+
+                R.id.me -> {
+                    val intent = Intent(this, SemesterActivity::class.java)
+                    intent.putExtra("TITLE", "ME")
+                    startActivity(intent)
+                    mainDrawer.closeDrawers()
+                    true
+                }
+
+                R.id.bca -> {
+                    val intent = Intent(this, SemesterActivity::class.java)
+                    intent.putExtra("TITLE", "BCA")
+                    startActivity(intent)
+                    mainDrawer.closeDrawers()
+                    true
+                }
+
+                R.id.profile -> {
+                    val intent = Intent(this, ProfileActivity::class.java)
+                    startActivity(intent)
+                    mainDrawer.closeDrawers()
+                    true
+                }
+
+                R.id.forgetPassword -> {
+                    val intent = Intent(this, ForgetPasswordActivity::class.java)
+                    startActivity(intent)
+                    mainDrawer.closeDrawers()
+                    true
+                }
+
+                R.id.logOut -> {
+                    auth.signOut()
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+
+                R.id.share -> {
+                    Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()
+                    true
+                }
+
+                R.id.rateUs -> {
+                    Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()
+                    true
+                }
+
+                R.id.contactUs -> {
+                    Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                // Add more cases for other menu items
+                else -> {
+                    false
+                }
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle ActionBarDrawerToggle clicks
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true
         }

@@ -46,21 +46,22 @@ class SignUpActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
         database = FirebaseDatabase.getInstance()
 
-        setUpViews()
+        setUpViews() // Call method to set up views
         // setting on click listener on signup button
         signUpBtn.setOnClickListener {
-            registerUser()
+            registerUser() // Call method to register user when signup button is clicked
         }
     }
 
     private fun setUpViews() {
-        findView() // finding the views
-        setUpFireStore() // set up firestore fetching data from the firestore cloud database
-        activityChange() // intent from one one activity to other
-        setUpCollegeList() // setting up college list in the autocomplete edit text view
+        findView() // Call method to find views
+        setUpFireStore() // Call method to set up firestore fetching data from the firestore cloud database
+        activityChange() // Call method to handle activity transition
+        setUpCollegeList() // Call method to set up college list in the autocomplete edit text view
     }
 
     private fun findView() {
+        // Find all necessary views
         signUpFullName = findViewById(R.id.fullNameTxt)
         signUpEmail = findViewById(R.id.emailIDEditTxt)
         signUpPassword = findViewById(R.id.passwordEditTxt)
@@ -76,12 +77,14 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
+        // Retrieve user input data
         val fullName = signUpFullName.text.toString()
         val email = signUpEmail.text.toString()
         val password = signUpPassword.text.toString()
         val confirmPassword = signUpConfirmPassword.text.toString()
         val collegeName = signUpCollegeName.text.toString()
 
+        // Set onFocusChangeListeners to handle helper text visibility
         signUpFullName.setOnFocusChangeListener { _, focused ->
             if (!focused) {
                 fullNameContainer.helperText = enterFullName()
@@ -110,7 +113,11 @@ class SignUpActivity : AppCompatActivity() {
 
         signUpProgressBar.visibility = View.VISIBLE
 
+        // Validate user input data
         if (fullName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || collegeName.isEmpty()) {
+            // Check if any field is empty and show appropriate helper text
+            // Hide progress bar
+            // Return from function
             if (fullName.isEmpty()) {
                 fullNameContainer.helperText = "Enter your full name"
             }
@@ -127,61 +134,74 @@ class SignUpActivity : AppCompatActivity() {
                 collegeNameContainer.helperText = "Enter your college name"
             }
             signUpProgressBar.visibility = View.GONE
+            return
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            // Check if email is valid and show appropriate helper text
+            // Hide progress bar
+            // Return from function
             signUpProgressBar.visibility = View.GONE
             emailContainer.helperText = "Enter valid email address"
+            return
         } else if (password.length < 6) {
+            // Check if password is at least 6 characters long and show appropriate helper text
+            // Hide progress bar
+            // Return from function
             signUpProgressBar.visibility = View.GONE
             passwordContainer.helperText = "Enter password more than 5 characters"
+            return
         } else if (password != confirmPassword) {
+            // Check if password matches confirm password and show appropriate helper text
+            // Hide progress bar
+            // Return from function
             signUpProgressBar.visibility = View.GONE
             confirmPasswordContainer.helperText = "Password not matched, try again"
+            return
         } else {
+            // If all input data is valid, proceed with user registration
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-
-                    // Verifying the User Email
-                    auth.currentUser?.sendEmailVerification()
-                        ?.addOnSuccessListener {
-                            signUpProgressBar.visibility = View.GONE
-                            Toast.makeText(
-                                this,
-                                "Please check your email and verify it",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
-                            // Saving Data of User
-                            val databaseRef =
-                                auth.currentUser?.let { task1 ->
-                                    database.reference.child("users").child(task1.uid)
-                                }
-
-                            val users = Users(
-                                fullName, email, password, collegeName,
-                                auth.currentUser?.uid
-                            )
-                            databaseRef?.setValue(users)?.addOnCompleteListener { task2 ->
-                                if (task2.isSuccessful) {
-                                    signUpProgressBar.visibility = View.GONE
-                                    val intent = Intent(this, LoginActivity::class.java)
-                                    startActivity(intent)
-                                    finish()
-                                } else {
-                                    signUpProgressBar.visibility = View.GONE
-                                    Toast.makeText(
-                                        this,
-                                        "${task2.exception?.message}",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
+                    // If user registration is successful, send email verification
+                    auth.currentUser?.sendEmailVerification()?.addOnSuccessListener {
+                        signUpProgressBar.visibility = View.GONE
+                        // Show toast message to check email for verification
+                        Toast.makeText(
+                            this,
+                            "Please check your email and verify it",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        // Save user data to Firebase Realtime Database
+                        val databaseRef = auth.currentUser?.let { task1 ->
+                            database.reference.child("users").child(task1.uid)
+                        }
+                        val users = Users(
+                            fullName, email, password, collegeName,
+                            auth.currentUser?.uid
+                        )
+                        databaseRef?.setValue(users)?.addOnCompleteListener { task2 ->
+                            if (task2.isSuccessful) {
+                                signUpProgressBar.visibility = View.GONE
+                                // If user data is saved successfully, navigate to LoginActivity
+                                val intent = Intent(this, LoginActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                signUpProgressBar.visibility = View.GONE
+                                // Show error message if user data saving fails
+                                Toast.makeText(
+                                    this,
+                                    "${task2.exception?.message}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
-                        ?.addOnFailureListener {
-                            signUpProgressBar.visibility = View.GONE
-                            Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
-                        }
+                    }?.addOnFailureListener {
+                        signUpProgressBar.visibility = View.GONE
+                        // Show error message if sending email verification fails
+                        Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     signUpProgressBar.visibility = View.GONE
+                    // Show error message if user registration fails
                     Toast.makeText(this, "${task.exception?.message}", Toast.LENGTH_SHORT)
                         .show()
                 }
@@ -189,6 +209,7 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    // Helper methods to handle input field validation
     private fun enterFullName(): String? {
         val fullName = signUpFullName.text.toString()
         if (fullName.isEmpty()) {
@@ -230,8 +251,8 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun activityChange() {
+        // Handle activity transition from SignUpActivity to LoginActivity
         val loginTxt: TextView = findViewById(R.id.loginTxt)
-
         loginTxt.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -240,18 +261,14 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun setUpFireStore() {
-
-        // Fetching College List in AutoCompleteTextView
+        // Fetch college list from Firestore and populate AutoCompleteTextView
         val collectionReference =
             firestore.collection("Colleges List").document("teMaCO78gGSS6ev1xsSQ")
-
         collectionReference.get()
             .addOnSuccessListener { querySnapshot ->
                 if (querySnapshot != null) {
-
                     val temp = querySnapshot.data?.get("noOfColleges").toString()
                     val size = temp.toInt() // total number of colleges
-
                     var i = 1
                     while (i <= size) {
                         val value = querySnapshot.data?.get("$i").toString()
@@ -261,12 +278,13 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener {
+                // Show toast message if fetching college list fails
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
             }
-
     }
 
     private fun setUpCollegeList() {
+        // Set up college list in AutoCompleteTextView
         collegeNameAutoCompleteEditText = findViewById(R.id.collegeNameAutoCompleteEditText)
         collegeNameEditTextAdapter =
             ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, collegeNameList)

@@ -17,21 +17,23 @@ class CodingPlaylistActivity : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
     private var codingPlaylistList = mutableListOf<StudyPlaylist>()
     private lateinit var adapter: StudyPlaylistAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coding_playlist)
         firestore = FirebaseFirestore.getInstance()
 
-        setUpViews()
+        setUpViews() // Call method to set up views
     }
 
     private fun setUpViews() {
-        setUpToolbar()
-        setUpStudyPlayList()
-        setUpRecyclerView()
-        setUpSearchView()
+        setUpToolbar() // Set up toolbar
+        setUpStudyPlayList() // Fetch coding playlist data from Firestore
+        setUpRecyclerView() // Set up RecyclerView to display coding playlists
+        setUpSearchView() // Set up SearchView for filtering the playlist
     }
 
+    // Set up SearchView for filtering the playlist
     private fun setUpSearchView() {
         val searchView: androidx.appcompat.widget.SearchView = findViewById(R.id.playlistSearchView)
 
@@ -42,7 +44,7 @@ class CodingPlaylistActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                filterList(newText)
+                filterList(newText) // Filter the list based on the query
                 return true
             }
         })
@@ -58,27 +60,32 @@ class CodingPlaylistActivity : AppCompatActivity() {
                 }
             }
             if (filteredList.isEmpty()) {
+                // Show a toast message if no data is found
                 Toast.makeText(this@CodingPlaylistActivity, "No Data found", Toast.LENGTH_SHORT)
                     .show()
             } else {
-                adapter.setFilteredList(filteredList)
+                adapter.setFilteredList(filteredList) // Update RecyclerView with filtered list
             }
         }
     }
 
+    // Fetch coding playlist data from Firestore
     private fun setUpStudyPlayList() {
         val collectionReference = firestore.collection("Coding Playlist")
         collectionReference.addSnapshotListener { value, error ->
             if (value == null || error != null) {
+                // Show toast message in case of error fetching data
                 Toast.makeText(this, "Error fetching data", Toast.LENGTH_SHORT).show()
                 return@addSnapshotListener
             }
+            // Clear the list and populate it with fetched data
             codingPlaylistList.clear()
             codingPlaylistList.addAll(value.toObjects(StudyPlaylist::class.java))
-            adapter.notifyDataSetChanged()
+            adapter.notifyDataSetChanged() // Notify adapter about the data change
         }
     }
 
+    // Set up RecyclerView to display coding playlists
     private fun setUpRecyclerView() {
         val studyPlaylistRecyclerView = findViewById<RecyclerView>(R.id.codingPlaylistRecyclerView)
         adapter = StudyPlaylistAdapter(this, codingPlaylistList)
@@ -86,9 +93,10 @@ class CodingPlaylistActivity : AppCompatActivity() {
         studyPlaylistRecyclerView.adapter = adapter
     }
 
+    // Set up toolbar
     private fun setUpToolbar() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.codingPlaylistToolbar)
-        toolbar?.title = "Study Playlist"
+        toolbar?.title = "Coding Playlist"
         setSupportActionBar(toolbar)
 
         toolbar?.setNavigationOnClickListener {

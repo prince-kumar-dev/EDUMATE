@@ -82,7 +82,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter"
-                            android:textColorHint="@color/gray3"
                             android:lines="1"
                             android:maxLines="1"
                             android:singleLine="true"

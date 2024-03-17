@@ -19,7 +19,6 @@ class DepartmentAdapter(private var context: Context, private val departments: L
     inner class DepartmentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var departmentViewTitle: TextView = itemView.findViewById(R.id.departmentTitle)
         var iconView: ImageView = itemView.findViewById(R.id.departmentIcon)
-        // var cardContainer: CardView = itemView.findViewById(R.id.departmentCardContainer)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DepartmentViewHolder {
@@ -35,7 +34,6 @@ class DepartmentAdapter(private var context: Context, private val departments: L
 
         holder.departmentViewTitle.text = departments[position].title
 
-        // holder.iconView.setImageResource(departments[position].iconUrl)
         Glide.with(context)
             .load(departments[position].iconUrl)
             .into(holder.iconView)

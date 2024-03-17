@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/nav_home"
-        android:icon="@drawable/home"
-        android:title="@string/home"/>
 
     <item
         android:id="@+id/placement"
@@ -21,10 +17,19 @@
         android:icon="@drawable/r_and_d"
         android:title="@string/r_amp_d"/>
 
-    <item
-        android:id="@+id/playlist"
-        android:icon="@drawable/playlist"
-        android:title="@string/playlist"/>
+    <item android:title="@string/playlist">
+        <menu>
+            <item
+                android:id="@+id/studyPlaylist"
+                android:icon="@drawable/playlist"
+                android:title="@string/study_playlist"/>
+            <item
+                android:id="@+id/codingPlaylist"
+                android:icon="@drawable/coding"
+                android:title="@string/coding_playlist"/>
+        </menu>
+    </item>
+
 
     <item android:title="@string/department">
 
@@ -64,7 +69,7 @@
                 android:icon="@drawable/forget_password"
                 android:title="@string/forget_npassword"/>
             <item
-                android:id="@+id/lotOut"
+                android:id="@+id/logOut"
                 android:icon="@drawable/log_out"
                 android:title="@string/log_out"/>
         </menu>
