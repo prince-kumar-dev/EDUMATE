@@ -61,6 +61,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/profile"
+        app:tint="@color/black1"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
@@ -105,7 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.15" />
+                app:layout_constraintGuide_percent="0.12" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/profileName"
@@ -118,7 +119,7 @@
                 android:fontFamily="@font/inter"
                 android:textColor="@color/black1"
                 android:text="Name"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
@@ -163,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.15" />
+                app:layout_constraintGuide_percent="0.12" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/profileEmail"
@@ -176,7 +177,7 @@
                 android:textColor="@color/black1"
                 android:fontFamily="@font/inter"
                 android:text="Email Address"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline6"
@@ -221,7 +222,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.15" />
+                app:layout_constraintGuide_percent="0.12" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/profileCollegeName"
@@ -234,7 +235,7 @@
                 android:fontFamily="@font/inter"
                 android:textColor="@color/black1"
                 android:text="College Name"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline8"
@@ -279,7 +280,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.15" />
+                app:layout_constraintGuide_percent="0.12" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/profileLogOut"
@@ -292,7 +293,7 @@
                 android:textColor="@color/black1"
                 android:gravity="center"
                 android:text="LOG OUT"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/guideline11"
                 app:layout_constraintStart_toStartOf="@+id/guideline10"

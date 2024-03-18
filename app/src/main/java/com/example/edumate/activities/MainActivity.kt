@@ -1,6 +1,8 @@
 package com.example.edumate.activities
 
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
@@ -119,7 +121,6 @@ class MainActivity : AppCompatActivity() {
     private fun setUpDepartment() {
         // Fetch departments data from Firestore and populate the list
         val collectionReference = firestore.collection("Departments List")
-
         collectionReference.addSnapshotListener { value, error ->
             if (value == null || error != null) {
                 Toast.makeText(this, "Error fetching data", Toast.LENGTH_SHORT).show()
@@ -242,6 +243,12 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.share -> {
+//                    val shareIntent = Intent(Intent.ACTION_SEND)
+//                    shareIntent.type = "text/plain"
+//                    val shareBody =
+//                        "Hey there, meet your new study buddy – Edumate! It's like having a super-smart friend who helps you ace your studies. Let's make learning awesome together!" // Replace with your desired text
+//                    shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
+//                    startActivity(Intent.createChooser(shareIntent, "Share via"))
                     Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()
                     true
                 }
@@ -252,7 +259,11 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.contactUs -> {
-                    Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    val data = Uri.parse("mailto:edumate.contact@gmail.com?subject=Want to Resolve Query &body=")
+                    intent.data = data
+                    startActivity(intent)
+
                     true
                 }
                 // Add more cases for other menu items

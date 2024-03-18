@@ -1,11 +1,10 @@
 package com.example.edumate.activities
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
-import android.view.View
-import android.widget.ProgressBar
+import android.view.Window
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,20 +19,13 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var passwordContainer: com.google.android.material.textfield.TextInputLayout
     private lateinit var loginPassword: com.google.android.material.textfield.TextInputEditText
     private lateinit var loginBtn: androidx.appcompat.widget.AppCompatButton
-    private lateinit var loginProgressBar: ProgressBar
     private lateinit var forgetPassword: TextView
+    private lateinit var dialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         auth = FirebaseAuth.getInstance()
-
-        // Check if user is already logged in
-        if (auth.currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
 
         setUpViews() // Call method to set up views
 
@@ -67,21 +59,21 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
 
-            loginProgressBar.visibility = View.VISIBLE
+            showProgressBar()
 
             // Validate user input data
             if (email.isEmpty() || password.isEmpty()) {
                 if (email.isEmpty()) {
-                    loginProgressBar.visibility = View.GONE
+                    hideProgressBar()
                     emailContainer.helperText = "Enter your email"
                 }
                 if (password.isEmpty()) {
-                    loginProgressBar.visibility = View.GONE
+                    hideProgressBar()
                     passwordContainer.helperText = "Enter your password"
                 }
             } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 // Check if email is valid and show appropriate helper text
-                loginProgressBar.visibility = View.GONE
+                hideProgressBar()
                 emailContainer.helperText = "Enter valid email address"
             } else {
                 // Attempt to sign in user with provided email and password
@@ -92,22 +84,17 @@ class LoginActivity : AppCompatActivity() {
 
                         if (verification == true) {
                             // If user is verified, show success message and navigate to MainActivity
-                            loginProgressBar.visibility = View.GONE
-                            Toast.makeText(
-                                this,
-                                "Login Successfully",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            hideProgressBar()
                             navigateToMainActivity()
                         } else {
                             // If user is not verified, show message to verify email
-                            loginProgressBar.visibility = View.GONE
+                            hideProgressBar()
                             Toast.makeText(this, "Please verify your email", Toast.LENGTH_LONG)
                                 .show()
                         }
                     } else {
                         // If sign in fails, show error message
-                        loginProgressBar.visibility = View.GONE
+                        hideProgressBar()
                         Toast.makeText(
                             this,
                             "Something went wrong with email or password",
@@ -153,7 +140,6 @@ class LoginActivity : AppCompatActivity() {
         passwordContainer = findViewById(R.id.loginPasswordContainer)
         loginPassword = findViewById(R.id.loginPasswordEditTxt)
         loginBtn = findViewById(R.id.loginBtn)
-        loginProgressBar = findViewById(R.id.progressBarLogin)
         forgetPassword = findViewById(R.id.forgetPasswordTxt)
     }
 
@@ -161,17 +147,34 @@ class LoginActivity : AppCompatActivity() {
         // Navigate to MainActivity
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        Toast.makeText(
+            this,
+            "Login Successfully",
+            Toast.LENGTH_SHORT
+        ).show()
         finish()
     }
 
     // Check if the user is already logged in when activity starts
     override fun onStart() {
         super.onStart()
-        Log.d("LoginActivity", "onStart() executed")
-        if (auth.currentUser != null) {
+        val verification = auth.currentUser?.isEmailVerified
+        if (auth.currentUser != null && verification == true) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun showProgressBar() {
+        dialog = Dialog(this@LoginActivity) // Create a new dialog
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE) // Request no title for the dialog window
+        dialog.setContentView(R.layout.progress_bar_layout) // Set layout for the progress dialog
+        dialog.setCanceledOnTouchOutside(false) // Set dialog to not dismiss on outside touch
+        dialog.show() // Show the progress dialog
+    }
+
+    private fun hideProgressBar() {
+        dialog.dismiss() // Dismiss the progress dialog
     }
 }

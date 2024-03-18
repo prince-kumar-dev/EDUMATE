@@ -1,9 +1,11 @@
 package com.example.edumate.activities
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
+import android.view.Window
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ProgressBar
@@ -35,9 +37,9 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var signUpConfirmPassword: com.google.android.material.textfield.TextInputEditText
     private lateinit var signUpCollegeName: AutoCompleteTextView
     private lateinit var signUpBtn: androidx.appcompat.widget.AppCompatButton
-    private lateinit var signUpProgressBar: ProgressBar
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
+    private lateinit var dialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +49,7 @@ class SignUpActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance()
 
         setUpViews() // Call method to set up views
+
         // setting on click listener on signup button
         signUpBtn.setOnClickListener {
             registerUser() // Call method to register user when signup button is clicked
@@ -73,7 +76,6 @@ class SignUpActivity : AppCompatActivity() {
         passwordContainer = findViewById(R.id.passwordContainer)
         confirmPasswordContainer = findViewById(R.id.confirmPasswordContainer)
         collegeNameContainer = findViewById(R.id.collegeNameContainer)
-        signUpProgressBar = findViewById(R.id.progressBarSignUp)
     }
 
     private fun registerUser() {
@@ -111,7 +113,7 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
 
-        signUpProgressBar.visibility = View.VISIBLE
+        showProgressBar()
 
         // Validate user input data
         if (fullName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || collegeName.isEmpty()) {
@@ -133,27 +135,27 @@ class SignUpActivity : AppCompatActivity() {
             if (collegeName.isEmpty()) {
                 collegeNameContainer.helperText = "Enter your college name"
             }
-            signUpProgressBar.visibility = View.GONE
+            hideProgressBar()
             return
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             // Check if email is valid and show appropriate helper text
             // Hide progress bar
             // Return from function
-            signUpProgressBar.visibility = View.GONE
+            hideProgressBar()
             emailContainer.helperText = "Enter valid email address"
             return
         } else if (password.length < 6) {
             // Check if password is at least 6 characters long and show appropriate helper text
             // Hide progress bar
             // Return from function
-            signUpProgressBar.visibility = View.GONE
+            hideProgressBar()
             passwordContainer.helperText = "Enter password more than 5 characters"
             return
         } else if (password != confirmPassword) {
             // Check if password matches confirm password and show appropriate helper text
             // Hide progress bar
             // Return from function
-            signUpProgressBar.visibility = View.GONE
+            hideProgressBar()
             confirmPasswordContainer.helperText = "Password not matched, try again"
             return
         } else {
@@ -162,7 +164,7 @@ class SignUpActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // If user registration is successful, send email verification
                     auth.currentUser?.sendEmailVerification()?.addOnSuccessListener {
-                        signUpProgressBar.visibility = View.GONE
+                        hideProgressBar()
                         // Show toast message to check email for verification
                         Toast.makeText(
                             this,
@@ -179,13 +181,13 @@ class SignUpActivity : AppCompatActivity() {
                         )
                         databaseRef?.setValue(users)?.addOnCompleteListener { task2 ->
                             if (task2.isSuccessful) {
-                                signUpProgressBar.visibility = View.GONE
+                                hideProgressBar()
                                 // If user data is saved successfully, navigate to LoginActivity
                                 val intent = Intent(this, LoginActivity::class.java)
                                 startActivity(intent)
                                 finish()
                             } else {
-                                signUpProgressBar.visibility = View.GONE
+                                hideProgressBar()
                                 // Show error message if user data saving fails
                                 Toast.makeText(
                                     this,
@@ -195,12 +197,12 @@ class SignUpActivity : AppCompatActivity() {
                             }
                         }
                     }?.addOnFailureListener {
-                        signUpProgressBar.visibility = View.GONE
+                        hideProgressBar()
                         // Show error message if sending email verification fails
                         Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    signUpProgressBar.visibility = View.GONE
+                    hideProgressBar()
                     // Show error message if user registration fails
                     Toast.makeText(this, "${task.exception?.message}", Toast.LENGTH_SHORT)
                         .show()
@@ -290,5 +292,16 @@ class SignUpActivity : AppCompatActivity() {
             ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, collegeNameList)
         collegeNameAutoCompleteEditText.threshold = 2
         collegeNameAutoCompleteEditText.setAdapter(collegeNameEditTextAdapter)
+    }
+    private fun showProgressBar() {
+        dialog = Dialog(this@SignUpActivity) // Create a new dialog
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE) // Request no title for the dialog window
+        dialog.setContentView(R.layout.progress_bar_layout) // Set layout for the progress dialog
+        dialog.setCanceledOnTouchOutside(false) // Set dialog to not dismiss on outside touch
+        dialog.show() // Show the progress dialog
+    }
+
+    private fun hideProgressBar() {
+        dialog.dismiss() // Dismiss the progress dialog
     }
 }

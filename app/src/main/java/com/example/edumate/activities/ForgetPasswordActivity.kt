@@ -1,11 +1,11 @@
 package com.example.edumate.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Patterns
-import android.view.View
-import android.widget.ProgressBar
+import android.view.Window
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.edumate.R
 import com.google.firebase.auth.FirebaseAuth
 
@@ -15,7 +15,8 @@ class ForgetPasswordActivity : AppCompatActivity() {
     private lateinit var forgetPasswordEmailContainer: com.google.android.material.textfield.TextInputLayout
     private lateinit var btnResetPassword: androidx.appcompat.widget.AppCompatButton
     private lateinit var auth: FirebaseAuth
-    private lateinit var forgetPasswordProgressBar: ProgressBar
+    private lateinit var dialog: Dialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forget_password)
@@ -32,22 +33,23 @@ class ForgetPasswordActivity : AppCompatActivity() {
     private fun resetPassword() {
         val email = forgetPasswordEmail.text.toString()
 
-        forgetPasswordProgressBar.visibility = View.VISIBLE
+        showProgressBar()
 
         if (email.isEmpty()) {
+            hideProgressBar()
             forgetPasswordEmailContainer.helperText = "Enter your email"
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            forgetPasswordProgressBar.visibility = View.GONE
+            hideProgressBar()
             forgetPasswordEmailContainer.helperText = "Enter valid email address"
         } else {
 
             auth.sendPasswordResetEmail(email)
                 .addOnSuccessListener {
-                    forgetPasswordProgressBar.visibility = View.GONE
+                    hideProgressBar()
                     Toast.makeText(this, "Please check your email", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
-                    forgetPasswordProgressBar.visibility = View.GONE
+                    hideProgressBar()
                     Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
                 }
         }
@@ -60,7 +62,18 @@ class ForgetPasswordActivity : AppCompatActivity() {
     private fun findViews() {
         forgetPasswordEmail = findViewById(R.id.forgetPasswordEmailIDEditTxt)
         btnResetPassword = findViewById(R.id.resetBtn)
-        forgetPasswordProgressBar = findViewById(R.id.forgetPasswordProgressBar)
         forgetPasswordEmailContainer = findViewById(R.id.forgetPasswordEmailContainer)
+    }
+
+    private fun showProgressBar() {
+        dialog = Dialog(this@ForgetPasswordActivity) // Create a new dialog
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE) // Request no title for the dialog window
+        dialog.setContentView(R.layout.progress_bar_layout) // Set layout for the progress dialog
+        dialog.setCanceledOnTouchOutside(false) // Set dialog to not dismiss on outside touch
+        dialog.show() // Show the progress dialog
+    }
+
+    private fun hideProgressBar() {
+        dialog.dismiss() // Dismiss the progress dialog
     }
 }
