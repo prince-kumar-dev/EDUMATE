@@ -41,53 +41,40 @@ class PlacementSeriesActivity : AppCompatActivity() {
     }
 
     private fun setUpPlacementSeriesList() {
-
         val collectionReference = firestore.collection("Placement Series")
 
-        collectionReference.get().addOnSuccessListener { querySnapshot ->
-            for (document in querySnapshot.documents) {
-                val placementSeriesChildList = mutableListOf<PlacementChildItem>()
+        collectionReference.get()
+            .addOnSuccessListener { querySnapshot ->
 
-                collectionReference.document(document.id).collection("company")
-                    .addSnapshotListener { value, error ->
-                        if (value == null || error != null) {
+                for (document in querySnapshot.documents) {
+                    val companyId = document.id
+                    val childItemList = mutableListOf<PlacementChildItem>()
+
+                    collectionReference.document(companyId).collection("company")
+                        .get()
+                        .addOnSuccessListener { childQuerySnapshot ->
+                            childItemList.clear()
+                            childItemList.addAll(childQuerySnapshot.toObjects(PlacementChildItem::class.java))
+
+                            val existingParentItemIndex = placementSeriesParentList.indexOfFirst { it.title == companyId }
+                            if (existingParentItemIndex != -1) {
+                                placementSeriesParentList[existingParentItemIndex] = PlacementParentItem(companyId, R.drawable.company, childItemList)
+                            } else {
+                                placementSeriesParentList.add(PlacementParentItem(companyId, R.drawable.company, childItemList))
+                            }
+                            adapter.notifyDataSetChanged()
+                        }
+                        .addOnFailureListener {
                             Toast.makeText(this, "Error fetching data", Toast.LENGTH_SHORT).show()
-                            return@addSnapshotListener
                         }
-                        placementSeriesChildList.clear()
-                        placementSeriesChildList.addAll(value.toObjects(PlacementChildItem::class.java))
-
-                        if (placementSeriesParentList.contains(
-                                PlacementParentItem(
-                                    document.id,
-                                    R.drawable.company,
-                                    placementSeriesChildList
-                                )
-                            )
-                        ) {
-                            placementSeriesParentList.remove(
-                                PlacementParentItem(
-                                    document.id,
-                                    R.drawable.company,
-                                    placementSeriesChildList
-                                )
-                            )
-                        }
-                        placementSeriesParentList.add(
-                            PlacementParentItem(
-                                document.id,
-                                R.drawable.company,
-                                placementSeriesChildList
-                            )
-                        )
-                        adapter.notifyDataSetChanged()
-                    }
+                }
             }
-        }.addOnFailureListener { exception ->
-            Toast.makeText(this, "Error fetching data", Toast.LENGTH_SHORT).show()
-        }
-
+            .addOnFailureListener {
+                Toast.makeText(this, "Error fetching data", Toast.LENGTH_SHORT).show()
+            }
     }
+
+
 
     private fun setUpRecyclerView() {
 

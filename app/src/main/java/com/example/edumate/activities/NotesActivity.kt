@@ -47,205 +47,56 @@ class NotesActivity : AppCompatActivity() {
         }
     }
 
+
     private fun setUpNotesList() {
+        val collections = mapOf(
+            "Books" to R.drawable.book_notes,
+            "Exam" to R.drawable.book_notes,
+            "Module Notes" to R.drawable.module,
+            "Lab Files" to R.drawable.lab_file,
+            "Important Questions" to R.drawable.important_questions,
+            "Handwritten Notes" to R.drawable.handwritting_notes,
+            "Teacher's Notes" to R.drawable.teacher_notes,
+            "PPT Notes" to R.drawable.book_notes,
+            "More Stuffs" to R.drawable.book_notes // Default drawable resource
+        )
 
-        for (i in 1..5) {
-            val notesChildrenList = mutableListOf<NotesChildItem>()
+        val coll = "Subjects"
 
-            var coll: String = when (i) {
-                1 -> {
-                    "Books"
-                }
-                2 -> {
-                    "Lab Files"
-                }
-                3 -> {
-                    "Important Questions"
-                }
-                4 -> {
-                    "Handwritten Notes"
-                }
-                5 -> {
-                    "Teacher's Notes"
-                }
-                else -> {
-                    "More Stuffs"
-                }
-            }
+        if (department != null && semester != null && subject != null) {
+            val collectionReference = firestore.collection(department!!)
+                .document(semester!!)
+                .collection(coll)
+                .document(subject!!)
 
-            if(subject == "MST & PTU Final") {
-                coll = "Exam"
-            }
-
-            if (department != null && semester != null && subject != null) {
-                val collectionReference = firestore.collection(department!!)
-                collectionReference.document(semester!!).collection("Subjects")
-                    .document(subject!!)
-                    .collection(coll)
+            collections.forEach { (collectionName, drawableRes) ->
+                collectionReference.collection(collectionName)
                     .addSnapshotListener { value, error ->
                         if (value == null || error != null) {
-                            Toast.makeText(this, "Error fetching data", Toast.LENGTH_SHORT)
-                                .show()
+                            Toast.makeText(this, "Error fetching data", Toast.LENGTH_SHORT).show()
                             return@addSnapshotListener
                         }
-                        notesChildrenList.clear()
-                        notesChildrenList.addAll(value.toObjects(NotesChildItem::class.java))
+
+                        val notesChildrenList = value.toObjects(NotesChildItem::class.java)
                         if (notesChildrenList.isNotEmpty()) {
-                            when (i) {
-                                1 -> {
-                                    if(notesParentList.contains(
-                                            NotesParentItem(
-                                                coll,
-                                                R.drawable.book_notes,
-                                                notesChildrenList
-                                            )
-                                        )) {
-                                        notesParentList.remove(
-                                            NotesParentItem(
-                                                coll,
-                                                R.drawable.book_notes,
-                                                notesChildrenList
-                                            )
-                                        )
-                                    }
-                                    notesParentList.add(
-                                        NotesParentItem(
-                                            coll,
-                                            R.drawable.book_notes,
-                                            notesChildrenList
-                                        )
-                                    )
-                                }
-                                2 -> {
-                                    if(notesParentList.contains(
-                                            NotesParentItem(
-                                                coll,
-                                                R.drawable.lab_file,
-                                                notesChildrenList
-                                            )
-                                        )) {
-                                        notesParentList.remove(
-                                            NotesParentItem(
-                                                coll,
-                                                R.drawable.lab_file,
-                                                notesChildrenList
-                                            )
-                                        )
-                                    }
-                                    notesParentList.add(
-                                        NotesParentItem(
-                                            coll,
-                                            R.drawable.lab_file,
-                                            notesChildrenList
-                                        )
-                                    )
-                                }
-                                3 -> {
-                                    if(notesParentList.contains(
-                                            NotesParentItem(
-                                                coll,
-                                                R.drawable.important_questions,
-                                                notesChildrenList
-                                            )
-                                        )) {
-                                        notesParentList.remove(
-                                            NotesParentItem(
-                                                coll,
-                                                R.drawable.important_questions,
-                                                notesChildrenList
-                                            )
-                                        )
-                                    }
-                                    notesParentList.add(
-                                        NotesParentItem(
-                                            coll,
-                                            R.drawable.important_questions,
-                                            notesChildrenList
-                                        )
-                                    )
-                                }
-                                4 -> {
-                                    if(notesParentList.contains(
-                                            NotesParentItem(
-                                                coll,
-                                                R.drawable.handwritting_notes,
-                                                notesChildrenList
-                                            )
-                                        )) {
-                                        notesParentList.remove(
-                                            NotesParentItem(
-                                                coll,
-                                                R.drawable.handwritting_notes,
-                                                notesChildrenList
-                                            )
-                                        )
-                                    }
-                                    notesParentList.add(
-                                        NotesParentItem(
-                                            coll,
-                                            R.drawable.handwritting_notes,
-                                            notesChildrenList
-                                        )
-                                    )
-                                }
-                                5 -> {
-                                    if(notesParentList.contains(
-                                            NotesParentItem(
-                                                coll,
-                                                R.drawable.teacher_notes,
-                                                notesChildrenList
-                                            )
-                                        )) {
-                                        notesParentList.remove(
-                                            NotesParentItem(
-                                                coll,
-                                                R.drawable.teacher_notes,
-                                                notesChildrenList
-                                            )
-                                        )
-                                    }
-                                    notesParentList.add(
-                                        NotesParentItem(
-                                            coll,
-                                            R.drawable.teacher_notes,
-                                            notesChildrenList
-                                        )
-                                    )
-                                }
-                                else -> {
-                                    if(notesParentList.contains(
-                                            NotesParentItem(
-                                                coll,
-                                                R.drawable.book_notes,
-                                                notesChildrenList
-                                            )
-                                        )) {
-                                        notesParentList.remove(
-                                            NotesParentItem(
-                                                coll,
-                                                R.drawable.book_notes,
-                                                notesChildrenList
-                                            )
-                                        )
-                                    }
-                                    notesParentList.add(
-                                        NotesParentItem(
-                                            coll,
-                                            R.drawable.book_notes,
-                                            notesChildrenList
-                                        )
-                                    )
-                                }
+                            val existingItem = notesParentList.find { it.title == collectionName }
+                            if (existingItem != null) {
+                                notesParentList.remove(existingItem)
                             }
+                            notesParentList.add(
+                                NotesParentItem(
+                                    collectionName,
+                                    drawableRes,
+                                    notesChildrenList
+                                )
+                            )
                         }
                         adapter.notifyDataSetChanged()
                     }
             }
-            if(subject == "MST & PTU Final") {
-                break
-            }
         }
     }
+
 
     private fun setUpRecyclerView() {
         val notesRecyclerView = findViewById<RecyclerView>(R.id.notesParentRecyclerView)
