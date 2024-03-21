@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Window
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.edumate.R
 import com.example.edumate.models.Users
@@ -51,6 +52,7 @@ class ProfileActivity : AppCompatActivity() {
             auth.signOut() // Sign out the user
             val intent = Intent(this, LoginActivity::class.java) // Create intent to navigate to the LoginActivity
             startActivity(intent) // Start the LoginActivity
+            Toast.makeText(this, "Log Out Successfully", Toast.LENGTH_SHORT).show() // showing toast message
             finish() // Finish the current activity
         }
     }

@@ -1,18 +1,15 @@
 package com.example.edumate.activities
 
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.edumate.R
-import com.example.edumate.adapters.SemesterAdapter
 import com.example.edumate.adapters.StudyPlaylistAdapter
 import com.example.edumate.models.StudyPlaylist
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import java.util.Locale
 
 class StudyPlaylistActivity : AppCompatActivity() {

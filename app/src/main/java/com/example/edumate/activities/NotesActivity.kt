@@ -53,6 +53,7 @@ class NotesActivity : AppCompatActivity() {
             "Books" to R.drawable.book_notes,
             "Exam" to R.drawable.book_notes,
             "Module Notes" to R.drawable.module,
+            "Unit Notes" to R.drawable.module,
             "Lab Files" to R.drawable.lab_file,
             "Important Questions" to R.drawable.important_questions,
             "Handwritten Notes" to R.drawable.handwritting_notes,

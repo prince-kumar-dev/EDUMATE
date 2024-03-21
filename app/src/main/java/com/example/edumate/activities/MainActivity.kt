@@ -17,6 +17,7 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.example.edumate.R
 import com.example.edumate.adapters.DepartmentAdapter
 import com.example.edumate.models.Department
+import com.example.edumate.models.ImageSlide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -36,43 +37,11 @@ class MainActivity : AppCompatActivity() {
 
         setUpViews() // Call method to set up views
 
-        val imageSlider = findViewById<ImageSlider>(R.id.imageSlider)
-        val imageList = ArrayList<SlideModel>()
-        // Prepare image list for the image slider
-
-        // Prepare image list for the image slider
-        imageList.add(
-            SlideModel(
-                "https://th.bing.com/th/id/OIP.v7gEKUNUq-Jy-ARL41hoxAHaE7?rs=1&pid=ImgDetMain",
-                ""
-            )
-        )
-        imageList.add(
-            SlideModel(
-                "https://www.thebluediamondgallery.com/wooden-tile/images/study.jpg",
-                ""
-            )
-        )
-        imageList.add(
-            SlideModel(
-                "https://th.bing.com/th/id/OIP.f043btCYeiwl0ag7Ru90kwHaE3?w=1200&h=789&rs=1&pid=ImgDetMain",
-                ""
-            )
-        )
-        imageList.add(
-            SlideModel(
-                "https://2.bp.blogspot.com/-iYm4yrdE_Mc/U6-88DeA9wI/AAAAAAAACuA/2JZq8WSOJDA/s1600/study-tips-to-study-better.jpg",
-                "Study Tips"
-            )
-        )
-
-        // Add more images as needed
-        // Set up the image slider with the prepared image list
-        imageSlider.setImageList(imageList, ScaleTypes.FIT)
     }
 
     private fun setUpViews() {
         // Call methods to set up various components of the activity
+        setUpImageSlide()
         setUpDepartment()
         setUpDrawerLayout()
         setUpDepartmentRecyclerview()
@@ -80,6 +49,37 @@ class MainActivity : AppCompatActivity() {
         setUpCodingPlaylist()
         setUpPlacementSeries()
     }
+
+    private fun setUpImageSlide() {
+        val imageSlider = findViewById<ImageSlider>(R.id.imageSlider)
+        val imageList = ArrayList<SlideModel>()
+
+        imageList.add(SlideModel(R.drawable.welcome_to_edumate))
+        val collectionReference = firestore.collection("ImageSlide")
+        collectionReference.get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    // Retrieve data from each document
+                    val url = document.getString("url")
+                    val title = document.getString("title")
+                    // Add data to imageList
+                    if (url != null && title != null) {
+                        imageList.add(SlideModel(url, title))
+                    }
+                }
+                // Set up the image slider with the prepared image list
+                imageSlider.setImageList(imageList, ScaleTypes.FIT)
+            }
+            .addOnFailureListener { exception ->
+                // Handle errors
+                Toast.makeText(
+                    this,
+                    "Error fetching data: ${exception.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+    }
+
 
     private fun setUpPlacementSeries() {
         // Set up onClickListener for navigating to PlacementSeriesActivity
@@ -238,6 +238,7 @@ class MainActivity : AppCompatActivity() {
                     auth.signOut()
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
+                    Toast.makeText(this, "Log Out Successfully", Toast.LENGTH_SHORT).show()
                     finish()
                     true
                 }
@@ -260,7 +261,8 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.contactUs -> {
                     val intent = Intent(Intent.ACTION_VIEW)
-                    val data = Uri.parse("mailto:edumate.contact@gmail.com?subject=Want to Resolve Query &body=")
+                    val data =
+                        Uri.parse("mailto:edumate.contact@gmail.com?subject=Want to Resolve Query &body=")
                     intent.data = data
                     startActivity(intent)
 
