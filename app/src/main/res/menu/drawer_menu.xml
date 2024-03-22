@@ -35,25 +35,33 @@
 
         <menu>
             <item
+                android:id="@+id/aiDS"
+                android:icon="@drawable/cse"
+                android:title="@string/ai_ds"/>
+            <item
+                android:id="@+id/aiML"
+                android:icon="@drawable/cse"
+                android:title="@string/ai_ml"/>
+            <item
+                android:id="@+id/bca"
+                android:icon="@drawable/bca"
+                android:title="@string/bca"/>
+            <item
                 android:id="@+id/cse"
                 android:icon="@drawable/cse"
                 android:title="@string/cse"/>
-            <item
-                android:id="@+id/it"
-                android:icon="@drawable/it"
-                android:title="@string/it"/>
             <item
                 android:id="@+id/ece"
                 android:icon="@drawable/ece"
                 android:title="@string/ece"/>
             <item
+                android:id="@+id/it"
+                android:icon="@drawable/it"
+                android:title="@string/it"/>
+            <item
                 android:id="@+id/me"
                 android:icon="@drawable/me"
                 android:title="@string/me"/>
-            <item
-                android:id="@+id/bca"
-                android:icon="@drawable/bca"
-                android:title="@string/bca"/>
         </menu>
     </item>
 

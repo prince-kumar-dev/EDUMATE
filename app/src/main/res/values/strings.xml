@@ -39,5 +39,7 @@
     <string name="placement_series">Placement Series</string>
     <string name="loading">Loading</string>
     <string name="todo">TODO</string>
-    <string name="from"><![CDATA[From\nHarsh & Prince]]></string>
+    <string name="from"><![CDATA[By\nHarsh & Prince]]></string>
+    <string name="ai_ds"><![CDATA[AI & DS]]></string>
+    <string name="ai_ml"><![CDATA[AI & ML]]></string>
 </resources>

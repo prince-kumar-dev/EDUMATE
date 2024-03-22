@@ -1,6 +1,5 @@
 package com.example.edumate.activities
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -17,7 +16,6 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.example.edumate.R
 import com.example.edumate.adapters.DepartmentAdapter
 import com.example.edumate.models.Department
-import com.example.edumate.models.ImageSlide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -63,7 +61,10 @@ class MainActivity : AppCompatActivity() {
                     val url = document.getString("url")
                     val title = document.getString("title")
                     // Add data to imageList
-                    if (url != null && title != null) {
+                    if(title == "") {
+                        imageList.add(SlideModel(url))
+                    }
+                    else {
                         imageList.add(SlideModel(url, title))
                     }
                 }
@@ -180,17 +181,33 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
-                R.id.cse -> {
+                R.id.aiDS -> {
                     val intent = Intent(this, SemesterActivity::class.java)
-                    intent.putExtra("TITLE", "CSE")
+                    intent.putExtra("TITLE", "AI & DS")
                     startActivity(intent)
                     mainDrawer.closeDrawers()
                     true
                 }
 
-                R.id.it -> {
+                R.id.aiML -> {
                     val intent = Intent(this, SemesterActivity::class.java)
-                    intent.putExtra("TITLE", "IT")
+                    intent.putExtra("TITLE", "AI & ML")
+                    startActivity(intent)
+                    mainDrawer.closeDrawers()
+                    true
+                }
+
+                R.id.bca -> {
+                    val intent = Intent(this, SemesterActivity::class.java)
+                    intent.putExtra("TITLE", "BCA")
+                    startActivity(intent)
+                    mainDrawer.closeDrawers()
+                    true
+                }
+
+                R.id.cse -> {
+                    val intent = Intent(this, SemesterActivity::class.java)
+                    intent.putExtra("TITLE", "CSE")
                     startActivity(intent)
                     mainDrawer.closeDrawers()
                     true
@@ -204,17 +221,17 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
-                R.id.me -> {
+                R.id.it -> {
                     val intent = Intent(this, SemesterActivity::class.java)
-                    intent.putExtra("TITLE", "ME")
+                    intent.putExtra("TITLE", "IT")
                     startActivity(intent)
                     mainDrawer.closeDrawers()
                     true
                 }
 
-                R.id.bca -> {
+                R.id.me -> {
                     val intent = Intent(this, SemesterActivity::class.java)
-                    intent.putExtra("TITLE", "BCA")
+                    intent.putExtra("TITLE", "ME")
                     startActivity(intent)
                     mainDrawer.closeDrawers()
                     true
