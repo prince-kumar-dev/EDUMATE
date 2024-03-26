@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.edumate"
+    namespace = "com.edumate.learnmate"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.edumate"
+        applicationId = "com.edumate.learnmate"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -43,13 +43,13 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.firebase:firebase-auth:22.3.1")
-    implementation("com.google.firebase:firebase-firestore:24.10.3")
+    implementation("com.google.firebase:firebase-firestore:24.11.0")
     implementation("com.google.firebase:firebase-database:20.3.1")
     implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation("androidx.activity:activity-ktx:1.8.2")
     implementation ("com.intuit.sdp:sdp-android:1.1.0")
-    implementation("androidx.activity:activity:1.8.0")
+    implementation("androidx.activity:activity-ktx:1.8.2")
     implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
     implementation ("com.jpardogo.googleprogressbar:library:1.2.0")
     testImplementation("junit:junit:4.13.2")
