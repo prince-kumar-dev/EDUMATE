@@ -1,6 +1,9 @@
 package com.example.edumate.activities
 
+import android.app.Dialog
 import android.os.Bundle
+import android.view.Window
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,7 +12,9 @@ import com.example.edumate.R
 import com.example.edumate.adapters.PlacementSeriesParentAdapter
 import com.example.edumate.models.PlacementChildItem
 import com.example.edumate.models.PlacementParentItem
+import com.example.edumate.models.StudyPlaylist
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Locale
 
 class PlacementSeriesActivity : AppCompatActivity() {
 
@@ -28,6 +33,41 @@ class PlacementSeriesActivity : AppCompatActivity() {
         setUpPlacementSeriesList()
         setUpRecyclerView()
         setUpToolbar()
+        setUpSearchView()
+    }
+
+    private fun setUpSearchView() {
+        val searchView: androidx.appcompat.widget.SearchView = findViewById(R.id.placementSearchView)
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterList(newText)
+                return true
+            }
+        })
+    }
+
+    // Filtering the list using search View
+    private fun filterList(query: String?) {
+        if (query != null) {
+            val filteredList = mutableListOf<PlacementParentItem>()
+            for (i in placementSeriesParentList) {
+                if (i.title.lowercase(Locale.ROOT).contains(query)) {
+                    filteredList.add(i)
+                }
+            }
+            if (filteredList.isEmpty()) {
+                Toast.makeText(this@PlacementSeriesActivity, "No data found", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                adapter.setFilteredList(filteredList)
+            }
+        }
     }
 
     private fun setUpToolbar() {
@@ -56,11 +96,23 @@ class PlacementSeriesActivity : AppCompatActivity() {
                             childItemList.clear()
                             childItemList.addAll(childQuerySnapshot.toObjects(PlacementChildItem::class.java))
 
-                            val existingParentItemIndex = placementSeriesParentList.indexOfFirst { it.title == companyId }
+                            val existingParentItemIndex =
+                                placementSeriesParentList.indexOfFirst { it.title == companyId }
                             if (existingParentItemIndex != -1) {
-                                placementSeriesParentList[existingParentItemIndex] = PlacementParentItem(companyId, R.drawable.company, childItemList)
+                                placementSeriesParentList[existingParentItemIndex] =
+                                    PlacementParentItem(
+                                        companyId,
+                                        R.drawable.company,
+                                        childItemList
+                                    )
                             } else {
-                                placementSeriesParentList.add(PlacementParentItem(companyId, R.drawable.company, childItemList))
+                                placementSeriesParentList.add(
+                                    PlacementParentItem(
+                                        companyId,
+                                        R.drawable.company,
+                                        childItemList
+                                    )
+                                )
                             }
                             adapter.notifyDataSetChanged()
                         }
@@ -75,7 +127,6 @@ class PlacementSeriesActivity : AppCompatActivity() {
     }
 
 
-
     private fun setUpRecyclerView() {
 
         val placementSeriesRecyclerView =
@@ -84,5 +135,4 @@ class PlacementSeriesActivity : AppCompatActivity() {
         placementSeriesRecyclerView.layoutManager = LinearLayoutManager(this)
         placementSeriesRecyclerView.adapter = adapter
     }
-
 }

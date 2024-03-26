@@ -61,7 +61,7 @@ class CodingPlaylistActivity : AppCompatActivity() {
             }
             if (filteredList.isEmpty()) {
                 // Show a toast message if no data is found
-                Toast.makeText(this@CodingPlaylistActivity, "No Data found", Toast.LENGTH_SHORT)
+                Toast.makeText(this@CodingPlaylistActivity, "No data found", Toast.LENGTH_SHORT)
                     .show()
             } else {
                 adapter.setFilteredList(filteredList) // Update RecyclerView with filtered list

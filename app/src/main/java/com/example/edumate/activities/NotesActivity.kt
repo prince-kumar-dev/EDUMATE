@@ -50,14 +50,14 @@ class NotesActivity : AppCompatActivity() {
 
     private fun setUpNotesList() {
         val collections = mapOf(
-            "Books" to R.drawable.book_notes,
-            "Exam" to R.drawable.exam_notes,
-            "Module Notes" to R.drawable.module,
-            "Unit Notes" to R.drawable.module,
-            "Lab Files" to R.drawable.lab_file,
             "Important Questions" to R.drawable.important_questions,
+            "Exam" to R.drawable.exam_notes,
+            "Lab Files" to R.drawable.lab_file,
+            "Books" to R.drawable.book_notes,
             "Handwritten Notes" to R.drawable.handwritting_notes,
             "Teacher's Notes" to R.drawable.teacher_notes,
+            "Module Notes" to R.drawable.module,
+            "Unit Notes" to R.drawable.module,
             "PPT Notes" to R.drawable.ppt,
             "More Stuffs" to R.drawable.book_notes // Default drawable resource
         )

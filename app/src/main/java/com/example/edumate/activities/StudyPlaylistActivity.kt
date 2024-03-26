@@ -59,7 +59,7 @@ class StudyPlaylistActivity : AppCompatActivity() {
                 }
             }
             if (filteredList.isEmpty()) {
-                Toast.makeText(this@StudyPlaylistActivity, "No Data found", Toast.LENGTH_SHORT)
+                Toast.makeText(this@StudyPlaylistActivity, "No data found", Toast.LENGTH_SHORT)
                     .show()
             } else {
                 adapter.setFilteredList(filteredList)

@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.edumate.R
 import com.example.edumate.models.PlacementParentItem
+import com.example.edumate.models.StudyPlaylist
 
 class PlacementSeriesParentAdapter(
     val context: Context,
-    private val placementSeriesParentList: List<PlacementParentItem>
+    private var placementSeriesParentList: List<PlacementParentItem>
 ) :
     RecyclerView.Adapter<PlacementSeriesParentAdapter.PlacementSeriesParentViewHolder>() {
 
@@ -23,6 +24,11 @@ class PlacementSeriesParentAdapter(
         val titleTv: TextView = itemView.findViewById(R.id.placementSeriesParentTitleTv)
         val childRecyclerView: RecyclerView =
             itemView.findViewById(R.id.placementContentRecyclerView)
+    }
+
+    fun setFilteredList(placementSeriesParentList: List<PlacementParentItem>) {
+        this.placementSeriesParentList = placementSeriesParentList
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(
