@@ -157,16 +157,6 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
-                R.id.articles -> {
-                    Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()
-                    true
-                }
-
-                R.id.r_and_d -> {
-                    Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()
-                    true
-                }
-
                 R.id.studyPlaylist -> {
                     val intent = Intent(this, StudyPlaylistActivity::class.java)
                     startActivity(intent)
@@ -257,22 +247,6 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                     Toast.makeText(this, "Log Out Successfully", Toast.LENGTH_SHORT).show()
                     finish()
-                    true
-                }
-
-                R.id.share -> {
-//                    val shareIntent = Intent(Intent.ACTION_SEND)
-//                    shareIntent.type = "text/plain"
-//                    val shareBody =
-//                        "Hey there, meet your new study buddy – Edumate! It's like having a super-smart friend who helps you ace your studies. Let's make learning awesome together!" // Replace with your desired text
-//                    shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
-//                    startActivity(Intent.createChooser(shareIntent, "Share via"))
-                    Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()
-                    true
-                }
-
-                R.id.rateUs -> {
-                    Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()
                     true
                 }
 
