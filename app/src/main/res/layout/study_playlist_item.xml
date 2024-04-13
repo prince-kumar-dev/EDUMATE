@@ -7,9 +7,10 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        app:cardCornerRadius="@dimen/_4sdp"
         android:backgroundTint="@color/white"
-        app:cardElevation="1dp"
+        app:cardElevation="@dimen/_4sdp"
+        app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

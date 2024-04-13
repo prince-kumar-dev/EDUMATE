@@ -42,4 +42,7 @@
     <string name="from"><![CDATA[By\nHarsh & Prince]]></string>
     <string name="ai_ds"><![CDATA[AI & DS]]></string>
     <string name="ai_ml"><![CDATA[AI & ML]]></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_name">Hello Name!</string>
 </resources>
