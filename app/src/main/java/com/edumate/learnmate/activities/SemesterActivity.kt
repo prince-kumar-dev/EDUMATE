@@ -2,6 +2,7 @@ package com.edumate.learnmate.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,14 +34,13 @@ class SemesterActivity : AppCompatActivity() {
     }
 
     private fun setUpToolbar() {
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.semesterToolbar)
-        toolbar?.title = department
-        setSupportActionBar(toolbar)
+        val semesterTitle = findViewById<com.google.android.material.textview.MaterialTextView>(R.id.semesterTitle)
+        val backArrowImg = findViewById<ImageView>(R.id.backArrowImg)
+        semesterTitle.text = department
 
-        toolbar?.setNavigationOnClickListener {
+        backArrowImg.setOnClickListener {
             finish()
         }
-
     }
 
     private fun setUpSemesterList() {

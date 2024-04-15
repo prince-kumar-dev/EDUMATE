@@ -12,7 +12,7 @@
         android:layout_margin="8dp"
         app:cardBackgroundColor="@color/white"
         app:layout_constraintDimensionRatio="1:4"
-        app:cardCornerRadius="4dp"
+        app:cardCornerRadius="@dimen/_5sdp"
         app:cardElevation="1dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"

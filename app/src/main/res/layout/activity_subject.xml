@@ -7,62 +7,67 @@
     android:background="@color/gray5"
     tools:context=".activities.SubjectActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/subjectToolbar"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/secondary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:layout_constraintBottom_toTopOf="@+id/guideline1"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/arrow_back"
-        app:titleTextColor="@color/white" />
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageView
+            android:id="@+id/backArrowImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/subjectTitle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/inter_semibold"
+            android:text="@string/app_name"
+            android:textColor="@color/black1"
+            android:textSize="@dimen/_16sdp"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline0"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline1"
+        android:id="@+id/guideline"
+        app:layout_constraintGuide_percent="0.06"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.07" />
-
-    <View
-        android:id="@+id/viewBackground"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/toolbar_design_background"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline1" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/toolbar_design"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subjectToolbar" />
+        android:orientation="horizontal" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/subjectRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subjectToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

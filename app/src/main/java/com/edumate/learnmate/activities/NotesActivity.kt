@@ -1,6 +1,7 @@
 package com.edumate.learnmate.activities
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,11 +39,12 @@ class NotesActivity : AppCompatActivity() {
     }
 
     private fun setUpToolbar() {
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.notesToolbar)
-        toolbar?.title = subject
-        setSupportActionBar(toolbar)
+        val notesTitle = findViewById<com.google.android.material.textview.MaterialTextView>(R.id.notesTitle)
+        val backArrowImg = findViewById<ImageView>(R.id.backArrowImg)
 
-        toolbar?.setNavigationOnClickListener {
+        notesTitle.text = subject
+
+        backArrowImg.setOnClickListener {
             finish()
         }
     }

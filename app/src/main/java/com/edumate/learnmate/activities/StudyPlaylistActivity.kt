@@ -1,6 +1,7 @@
 package com.edumate.learnmate.activities
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -90,11 +91,11 @@ class StudyPlaylistActivity : AppCompatActivity() {
     }
 
     private fun setUpToolbar() {
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.studyPlaylistToolbar)
-        toolbar?.title = "Study Playlist"
-        setSupportActionBar(toolbar)
+        val studyPlaylistTitle = findViewById<com.google.android.material.textview.MaterialTextView>(R.id.studyPlaylistTitle)
+        val backArrowImg = findViewById<ImageView>(R.id.backArrowImg)
+        studyPlaylistTitle.text = "Study Playlist"
 
-        toolbar?.setNavigationOnClickListener {
+        backArrowImg.setOnClickListener {
             finish()
         }
     }
