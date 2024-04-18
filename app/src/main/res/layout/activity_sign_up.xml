@@ -144,7 +144,8 @@
                             app:boxStrokeColor="@color/secondary"
                             app:helperText=""
                             app:helperTextTextColor="@color/error"
-                            app:passwordToggleEnabled="true">
+                            app:passwordToggleEnabled="true"
+                            app:passwordToggleTint="@color/gray3">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/passwordEditTxt"
@@ -171,7 +172,8 @@
                             app:boxStrokeColor="@color/secondary"
                             app:helperText=""
                             app:helperTextTextColor="@color/error"
-                            app:passwordToggleEnabled="true">
+                            app:passwordToggleEnabled="true"
+                            app:passwordToggleTint="@color/gray3">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/confirmPasswordEditTxt"
@@ -197,7 +199,8 @@
                             android:textColorHint="@color/gray3"
                             app:boxStrokeColor="@color/secondary"
                             app:helperText=""
-                            app:helperTextTextColor="@color/error">
+                            app:helperTextTextColor="@color/error"
+                            app:endIconTint="@color/gray3">
 
                             <AutoCompleteTextView
                                 android:id="@+id/collegeNameAutoCompleteEditText"

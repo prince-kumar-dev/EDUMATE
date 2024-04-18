@@ -9,9 +9,9 @@
     tools:context=".activities.CodingPlaylistActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/codingPlaylistToolbar"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        android:layout_height="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
         <ImageView
             android:id="@+id/backArrowImg"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
             android:contentDescription="@string/todo"
             android:src="@drawable/arrow_back"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -52,13 +52,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        app:layout_constraintGuide_percent="0.06"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" />
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
         android:layout_width="match_parent"
@@ -72,7 +65,7 @@
         app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline">
+        app:layout_constraintTop_toBottomOf="@+id/codingPlaylistToolbar">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/playlistSearchView"

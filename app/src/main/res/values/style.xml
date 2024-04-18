@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.ToolbarFont" parent="Widget.AppCompat.Toolbar">
+        <item name="android:fontFamily">@font/inter_semibold</item>
+    </style>
+</resources>
