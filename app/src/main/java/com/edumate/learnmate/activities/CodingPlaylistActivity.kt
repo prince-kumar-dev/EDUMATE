@@ -1,6 +1,5 @@
 package com.edumate.learnmate.activities
 
-import android.media.Image
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.SearchView
