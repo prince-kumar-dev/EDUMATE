@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.edumate.learnmate.R
+import com.edumate.learnmate.fragments.BlogsList
 import com.edumate.learnmate.fragments.Home
 import com.edumate.learnmate.fragments.UserProfile
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -32,6 +33,13 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
+                R.id.blogs -> {
+                    if(currentFragment !is BlogsList) {
+                        replaceFragment(BlogsList())
+                    }
+                    true
+                }
+
                 R.id.profile -> {
                     if (currentFragment !is UserProfile) {
                         replaceFragment(UserProfile())
@@ -44,7 +52,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
 
     private fun replaceFragment(fragment: Fragment) {

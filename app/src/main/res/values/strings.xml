@@ -45,4 +45,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_name">Hello Name!</string>
+    <string name="forget_pass">Forget Password</string>
+    <string name="articles">Articles</string>
+    <string name="blogs">Blogs</string>
 </resources>

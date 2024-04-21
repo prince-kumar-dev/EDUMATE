@@ -1,6 +1,7 @@
 package com.edumate.learnmate.activities
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -68,11 +69,12 @@ class PlacementSeriesActivity : AppCompatActivity() {
     }
 
     private fun setUpToolbar() {
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.placementSeriesToolbar)
-        toolbar?.title = "Placement Series"
-        setSupportActionBar(toolbar)
+        val placementSeriesTitle = findViewById<com.google.android.material.textview.MaterialTextView>(R.id.placementSeriesTitle)
+        val backArrowImg = findViewById<ImageView>(R.id.backArrowImg)
 
-        toolbar?.setNavigationOnClickListener {
+        placementSeriesTitle.text = "Placement Series"
+
+        backArrowImg?.setOnClickListener {
             finish()
         }
     }
