@@ -23,6 +23,7 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="70dp"
+        android:backgroundTint="@color/gray5"
         app:itemIconSize="@dimen/_22sdp"
         app:itemTextColor="@color/bottom_nav_selected_item_color"
         app:itemRippleColor="@color/white"
