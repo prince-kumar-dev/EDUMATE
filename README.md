@@ -1,11 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <h1>Welcome to Edumate!</h1>
-    <p>Discover Edumate, your comprehensive online academic companion, simplifying college life with its intuitive features. Seamlessly navigate through classes with our user-friendly interface, offering a Placement Series for career readiness, a Research and Development hub for innovation, and curated YouTube playlists for enriched learning experiences. Say goodbye to scattered notes and missed deadlines – Edumate ensures transparency and efficiency in managing your academic journey. Join us today and unlock your full potential with Edumate.</p>
-</body>
-</html>
+# Edumate - Your On-the-Go Study Buddy
+
+Discover **Edumate**, your ultimate online academic companion! Whether you're gearing up for exams or seeking extra support for your college studies, Edumate is here to help. Our platform offers organized college subject notes, ensuring a seamless experience for exam preparation.
+
+## Features
+
+- **User-Friendly Interface:** Navigate through our intuitive interface designed for a smooth user experience.
+- **Organized College Subject Notes:** Access comprehensive notes for various college subjects to aid in your studies.
+- **Placement Series:** Benefit from our specialized placement series to advance your career.
+- **Insightful Blogs:** Explore blogs offering valuable insights and tips for better academic preparation.
+- **Comprehensive Tutorials:** Learn through in-depth tutorials covering a wide array of subjects, including coding.
+
+With Edumate, learning becomes a breeze. Experience the convenience of accessible education at your fingertips.
+
+[Download Edumate from the Play Store](https://play.google.com/store/apps/details?id=com.edumate.learnmate&hl=en)
+
+Join us today and take your learning journey to the next level with Edumate!
