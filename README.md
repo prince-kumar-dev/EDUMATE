@@ -2,11 +2,15 @@
 
 # Edumate - Your On-the-Go Study Buddy!
 
-<img src="https://github.com/user-attachments/assets/bc38f496-200c-4099-8071-06b6c1eb71e9" alt="home_app" width="300" height="568">
+<img src="https://github.com/user-attachments/assets/bc38f496-200c-4099-8071-06b6c1eb71e9" alt="home" width="300" height="568">
 
-<img src="https://github.com/user-attachments/assets/e7ef0dcf-1427-44b0-b1bc-595c581bac38" alt="subject_app" width="300" height="568">
+<img src="https://github.com/user-attachments/assets/e7ef0dcf-1427-44b0-b1bc-595c581bac38" alt="subject" width="300" height="568">
 
-<img src=https://github.com/user-attachments/assets/81827a57-5793-40cb-a23c-3800a97aab13 alt="semester_app" width="300" height="568">
+<img src=https://github.com/user-attachments/assets/81827a57-5793-40cb-a23c-3800a97aab13 alt="semester" width="300" height="568">
+
+<img src=https://github.com/user-attachments/assets/7bfd70a3-20ec-47e3-982c-1022214f0608 alt="notes" width="300" height="568">
+
+
 
 Discover **Edumate**, your ultimate online academic companion! Whether you're gearing up for exams or seeking extra support for your college studies, Edumate is here to help. Our platform offers organized college subject notes, ensuring a seamless experience for exam preparation.
 
