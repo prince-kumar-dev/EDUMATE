@@ -48,4 +48,14 @@
     <string name="forget_pass">Forget Password</string>
     <string name="articles">Articles</string>
     <string name="blogs">Blogs</string>
+    <string name="our_team">Our Team</string>
+    <string name="prince_kumar">Prince Kumar</string>
+    <string name="developer">Developer</string>
+    <string name="founder">Founder</string>
+    <string name="harsh_jindal">Harsh Jindal</string>
+    <string name="blog_title">Blog Title</string>
+    <string name="exit_app">Exit App</string>
+    <string name="do_you_really_want_to_exit">Do you really want to exit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

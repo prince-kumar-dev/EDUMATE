@@ -12,6 +12,11 @@
         android:title="@string/blogs" />
 
     <item
+        android:id="@+id/team"
+        android:icon="@drawable/team"
+        android:title="@string/our_team" />
+
+    <item
         android:id="@+id/profile"
         android:icon="@drawable/profile"
         android:title="@string/profile" />

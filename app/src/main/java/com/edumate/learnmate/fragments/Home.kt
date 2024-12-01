@@ -12,7 +12,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -244,6 +243,8 @@ class Home : Fragment() {
             departmentAdapter.notifyDataSetChanged()
         }
     }
+
+
 
     private fun setUpImageSlide(view: View) {
         val imageSlider = view.findViewById<ImageSlider>(R.id.imageSlider)

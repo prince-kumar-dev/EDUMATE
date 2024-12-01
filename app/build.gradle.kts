@@ -12,8 +12,8 @@ android {
         applicationId = "com.edumate.learnmate"
         minSdk = 24
         targetSdk = 34
-        versionCode = 4
-        versionName = "2.1"
+        versionCode = 5
+        versionName = "2.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -54,8 +54,12 @@ dependencies {
     implementation ("com.jpardogo.googleprogressbar:library:1.2.0")
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.7")
     implementation("androidx.activity:activity-ktx:1.9.0")
+    implementation("androidx.fragment:fragment-ktx:1.8.5")
+    implementation("androidx.activity:activity:1.8.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("com.github.ibrahimsn98:SmoothBottomBar:1.7.9")
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
 }
