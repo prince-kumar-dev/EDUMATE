@@ -127,7 +127,6 @@ class PlacementSeriesActivity : AppCompatActivity() {
 
 
     private fun setUpRecyclerView() {
-
         val placementSeriesRecyclerView =
             findViewById<RecyclerView>(R.id.placementSeriesParentRecyclerView)
         adapter = PlacementSeriesParentAdapter(this, placementSeriesParentList)

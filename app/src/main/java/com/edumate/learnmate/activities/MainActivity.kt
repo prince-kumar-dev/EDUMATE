@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -13,6 +12,7 @@ import com.edumate.learnmate.fragments.BlogsList
 import com.edumate.learnmate.fragments.Home
 import com.edumate.learnmate.fragments.OurTeam
 import com.edumate.learnmate.fragments.UserProfile
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlin.system.exitProcess
 
@@ -59,6 +59,8 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        MobileAds.initialize(this@MainActivity) {}
     }
 
     override fun onBackPressed() {

@@ -14,12 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar"
         tools:targetApi="31">
-        <activity
-            android:name=".activities.OurTeamActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.our_team"
-            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9437359488548120~2837981592"/>
+
         <activity
             android:name=".activities.BlogView"
             android:exported="false" />
@@ -32,9 +31,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.ProfileActivity"
-            android:exported="false" />
         <activity
             android:name=".activities.CodingPlaylistActivity"
             android:exported="false" />

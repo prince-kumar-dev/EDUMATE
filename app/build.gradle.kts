@@ -12,8 +12,8 @@ android {
         applicationId = "com.edumate.learnmate"
         minSdk = 24
         targetSdk = 34
-        versionCode = 5
-        versionName = "2.2"
+        versionCode = 6
+        versionName = "2.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -61,5 +61,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("com.github.ibrahimsn98:SmoothBottomBar:1.7.9")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    // google Ad mob
+    implementation("com.google.android.gms:play-services-ads:23.6.0")
 
 }

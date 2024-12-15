@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.edumate.learnmate.R
 import com.edumate.learnmate.activities.SubjectActivity
@@ -17,7 +16,6 @@ class SemesterAdapter(private val context: Context, private val semester: List<S
 
     inner class SemesterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val semesterViewTitle: TextView = itemView.findViewById(R.id.semesterName)
-        val cardContainer: CardView = itemView.findViewById(R.id.semesterCardContainer)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SemesterViewHolder {

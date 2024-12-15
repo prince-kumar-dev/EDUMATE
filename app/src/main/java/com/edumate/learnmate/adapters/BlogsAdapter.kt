@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edumate.learnmate.R
 import com.edumate.learnmate.activities.BlogView
 import com.edumate.learnmate.models.Blogs
-import com.edumate.learnmate.models.StudyPlaylist
 
 class BlogsAdapter(private var blogs: List<Blogs>) :
     RecyclerView.Adapter<BlogsAdapter.BlogViewHolder>() {

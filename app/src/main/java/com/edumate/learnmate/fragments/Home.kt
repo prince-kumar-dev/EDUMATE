@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -29,6 +31,9 @@ import com.edumate.learnmate.activities.StudyPlaylistActivity
 import com.edumate.learnmate.adapters.DepartmentAdapter
 import com.edumate.learnmate.models.Department
 import com.edumate.learnmate.models.Users
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -46,6 +51,7 @@ class Home : Fragment() {
     private var departmentList = mutableListOf<Department>()
     private lateinit var databaseReference: DatabaseReference
     private lateinit var uid: String
+    private lateinit var adView1: AdView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,6 +83,46 @@ class Home : Fragment() {
         setUpCodingPlaylist(view)
         setUpPlacementSeries(view)
         storeUserDetailsToLocalDevice()
+        setUpAds(view)
+    }
+
+    private fun setUpAds(view: View) {
+        // Get reference to the ad container
+        val adContainer1 = view.findViewById<FrameLayout>(R.id.adViewContainer1)
+
+        // Create and configure the AdView
+        adView1 = AdView(requireContext()).apply {
+            adUnitId = "ca-app-pub-9437359488548120/7517568992" // Replace with your AdMob Ad Unit ID
+        }
+
+        // Calculate and set the ad size
+        adSize.let { size ->
+            adView1.setAdSize(size)
+            // Add AdView to the container
+            adContainer1.addView(adView1)
+            // Load an ad
+            val adRequest = AdRequest.Builder().build()
+            adView1.loadAd(adRequest)
+        }
+    }
+
+    // Get the ad size based on the screen width
+    private val adSize: AdSize
+        get() {
+            val displayMetrics = resources.displayMetrics
+            val adWidthPixels = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                requireActivity().windowManager.currentWindowMetrics.bounds.width()
+            } else {
+                displayMetrics.widthPixels
+            }
+            val density = displayMetrics.density
+            val adWidth = (adWidthPixels / density).toInt()
+            return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(requireContext(), adWidth)
+        }
+
+    override fun onDestroyView() {
+        adView1.destroy()
+        super.onDestroyView()
     }
 
     private fun storeUserDetailsToLocalDevice() {
@@ -160,11 +206,12 @@ class Home : Fragment() {
                 val url = "https://play.google.com/store/apps/details?id=com.edumate.learnmate"
                 val intent = Intent(Intent.ACTION_SEND)
                 val sub = "EDUMATE: Your Learning Partner"
-                val body = "Discover the magic of Edumate! Say goodbye to study stress with our easy-to-use platform. Dive into structured notes, engaging placement series, curated YouTube playlists, and thrilling coding sessions. Experience the joy of learning with Edumate's user-friendly interface!"
+                val body =
+                    "Discover the magic of Edumate! Say goodbye to study stress with our easy-to-use platform. Dive into structured notes, engaging placement series, curated YouTube playlists, and thrilling coding sessions. Experience the joy of learning with Edumate's user-friendly interface!\n\nDownload our app via link given below:"
 
                 intent.type = "text/html"
                 intent.putExtra(Intent.EXTRA_SUBJECT, sub)
-                intent.putExtra(Intent.EXTRA_TEXT, "$sub\n\n$body\n\n$url")
+                intent.putExtra(Intent.EXTRA_TEXT, "$sub\n\n$body\n$url")
                 startActivity(Intent.createChooser(intent, "Share Via"))
                 return true
             }
@@ -195,7 +242,8 @@ class Home : Fragment() {
 
     private fun setUpPlacementSeries(view: View) {
         // Set up onClickListener for navigating to PlacementSeriesActivity
-        val placementSeries = view.findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.placementSeries)
+        val placementSeries =
+            view.findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.placementSeries)
 
         placementSeries?.setOnClickListener {
             val intent = Intent(activity, PlacementSeriesActivity::class.java)
@@ -204,7 +252,8 @@ class Home : Fragment() {
     }
 
     private fun setUpCodingPlaylist(view: View) {
-        val codingPlaylist = view.findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.codingPlaylist)
+        val codingPlaylist =
+            view.findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.codingPlaylist)
 
         codingPlaylist?.setOnClickListener {
             val intent = Intent(activity, CodingPlaylistActivity::class.java)
@@ -213,7 +262,8 @@ class Home : Fragment() {
     }
 
     private fun setUpStudyPlaylist(view: View) {
-        val studyPlaylist = view.findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.studyPlaylist)
+        val studyPlaylist =
+            view.findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.studyPlaylist)
 
         studyPlaylist?.setOnClickListener {
             val intent = Intent(activity, StudyPlaylistActivity::class.java)
@@ -243,7 +293,6 @@ class Home : Fragment() {
             departmentAdapter.notifyDataSetChanged()
         }
     }
-
 
 
     private fun setUpImageSlide(view: View) {

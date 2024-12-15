@@ -1,25 +1,19 @@
 package com.edumate.learnmate.fragments
 
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.widget.ImageView
+import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.edumate.learnmate.R
 import com.edumate.learnmate.activities.LoginActivity
-import com.edumate.learnmate.models.Users
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 class UserProfile : Fragment() {
 
@@ -52,6 +46,23 @@ class UserProfile : Fragment() {
         }
 
         logOut(view) // Set click listener for logout button
+        shareApp(view)
+    }
+
+    private fun shareApp(view: View) {
+        val shareBtn = view.findViewById<Button>(R.id.shareButton)
+
+        shareBtn.setOnClickListener {
+            val url = "https://play.google.com/store/apps/details?id=com.edumate.learnmate"
+            val intent = Intent(Intent.ACTION_SEND)
+            val sub = "EDUMATE: Your Learning Partner"
+            val body = "Discover the magic of Edumate! Say goodbye to study stress with our easy-to-use platform. Dive into structured notes, engaging placement series, curated YouTube playlists, and thrilling coding sessions. Experience the joy of learning with Edumate's user-friendly interface!\n\nDownload our app via link given below:"
+
+            intent.type = "text/html"
+            intent.putExtra(Intent.EXTRA_SUBJECT, sub)
+            intent.putExtra(Intent.EXTRA_TEXT, "$sub\n\n$body\n$url")
+            startActivity(Intent.createChooser(intent, "Share Via"))
+        }
     }
 
     private fun getUserData(view: View) {
@@ -84,7 +95,7 @@ class UserProfile : Fragment() {
 
     private fun logOut(view: View) {
         val logOut =
-            view.findViewById<ImageView>(R.id.profileLogoutImg) // Find the logout ImageView in the layout
+            view.findViewById<Button>(R.id.logoutButton) // Find the logout ImageView in the layout
 
         logOut.setOnClickListener { // Set click listener for logout button
             auth.signOut() // Sign out the user
