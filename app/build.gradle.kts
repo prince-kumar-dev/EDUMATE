@@ -5,15 +5,15 @@ plugins {
 }
 
 android {
-    namespace = "com.edumate.learnmate"
+    namespace = "com.edumate.fellowmate"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.edumate.learnmate"
+        applicationId = "com.edumate.fellowmate"
         minSdk = 24
         targetSdk = 34
-        versionCode = 6
-        versionName = "2.3"
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -61,6 +61,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("com.github.ibrahimsn98:SmoothBottomBar:1.7.9")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("me.relex:circleindicator:2.1.6")
 
     // google Ad mob
     implementation("com.google.android.gms:play-services-ads:23.6.0")

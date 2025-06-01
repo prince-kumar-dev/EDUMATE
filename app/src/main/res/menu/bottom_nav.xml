@@ -7,6 +7,11 @@
         android:title="@string/home" />
 
     <item
+        android:id="@+id/course"
+        android:icon="@drawable/ic_course"
+        android:title="@string/courses" />
+
+    <item
         android:id="@+id/blogs"
         android:icon="@drawable/article"
         android:title="@string/blogs" />

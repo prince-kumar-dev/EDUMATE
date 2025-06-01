@@ -43,7 +43,6 @@
     <string name="from"><![CDATA[By\nHarsh & Prince]]></string>
     <string name="ai_ds"><![CDATA[AI & DS]]></string>
     <string name="ai_ml"><![CDATA[AI & ML]]></string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_name">Hello Name!</string>
     <string name="forget_pass">Forget Password</string>
@@ -60,4 +59,31 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="share_app">Share App</string>
+    <string name="courses">Courses</string>
+    <string name="find_a_course_you_want_to_learn">Find a course you want to learn</string>
+    <string name="recommended_course">Recommended Course</string>
+    <string name="category">Category</string>
+    <string name="certificate">| Certificate</string>
+    <string name="chai_code_free_courses">Chai Code Free Courses</string>
+    <string name="sde_complete_package">SDE Complete Package</string>
+    <string name="sde_skills">
+    "🚀 Key Skills for SDE Role:\n\n"
+    "🧠 Programming Languages: Java, C++, Python.\n"
+    "📚 DSA\n"
+    "🛠️ System Design\n"
+    "💾 DBMS\n"
+    "🖥️ Operating Systems\n"
+    "🌐 Networking\n"
+    "🔄 Version Control\n"
+    "☁️ Cloud Platforms: AWS, Azure, GCP (Optional).\n"
+    "📦 Frameworks: Spring Boot, Django, Flask, React, Angular.\n\n"
+    "💡 Soft Skills: Problem-Solving, Agile Methodologies, Communication, Teamwork.\n\n"
+    "💡 Focus Areas: DSA, System Design, and Strong Programming Skills."
+</string>
+    <string name="free_package">Free Package</string>
+    <string name="start_learning">Start Learning</string>
+    <string name="description">Description</string>
+    <string name="step_title">Step Title</string>
+
+
 </resources>

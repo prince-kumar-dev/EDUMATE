@@ -95,6 +95,7 @@
                     app:cardCornerRadius="14dp"
                     app:cardElevation="5dp"
                     app:layout_constraintBottom_toTopOf="@+id/studyPlaylistCardView"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/adViewContainer1">
 

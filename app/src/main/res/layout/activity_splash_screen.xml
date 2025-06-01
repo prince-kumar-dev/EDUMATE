@@ -21,19 +21,9 @@
         <ImageView
             android:id="@+id/splashScreenImg"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="400dp"
             android:contentDescription="@string/todo"
             android:src="@drawable/app_logo" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/splashScreenTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_bold"
-            android:gravity="center"
-            android:text="@string/edumate"
-            android:textColor="@color/primary"
-            android:textSize="@dimen/_24sdp" />
     </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView

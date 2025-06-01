@@ -1,15 +1,16 @@
 {
   "project_info": {
     "project_number": "238082743291",
+    "firebase_url": "https://edumate-422fd-default-rtdb.firebaseio.com",
     "project_id": "edumate-422fd",
     "storage_bucket": "edumate-422fd.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:238082743291:android:67126a723e8a5c01f3c95e",
+        "mobilesdk_app_id": "1:238082743291:android:24f2a1e4711878e3f3c95e",
         "android_client_info": {
-          "package_name": "com.edumate.learnmate"
+          "package_name": "com.edumate.fellowmate"
         }
       },
       "oauth_client": [],
