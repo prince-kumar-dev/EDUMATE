@@ -24,6 +24,6 @@ Discover **Edumate**, your ultimate online academic companion! Whether you're ge
 
 With Edumate, learning becomes a breeze. Experience the convenience of accessible education at your fingertips.
 
-[Download Edumate from the Play Store](https://play.google.com/store/apps/details?id=com.edumate.learnmate&hl=en)
+[Download Edumate](https://github.com/EdumateApp/edumate-download)
 
 Join us today and take your learning journey to the next level with Edumate!
